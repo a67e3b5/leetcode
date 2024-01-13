@@ -1431,7 +1431,7 @@ mod _1071_greatest_common_divisor_of_strings;
 // mod _1428_leftmost_column_with_at_least_a_one;
 // mod _1429_first_unique_number;
 // mod _1430_check_if_a_string_is_a_valid_sequence_from_root_to_leaves_path_in_a_binary_tree;
-// mod _1431_kids_with_the_greatest_number_of_candies;
+mod _1431_kids_with_the_greatest_number_of_candies;
 // mod _1432_max_difference_you_can_get_from_changing_an_integer;
 // mod _1433_check_if_a_string_can_break_another_string;
 // mod _1434_number_of_ways_to_wear_different_hats_to_each_other;
