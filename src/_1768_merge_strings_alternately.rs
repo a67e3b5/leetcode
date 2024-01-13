@@ -7,16 +7,18 @@
 // @lc code=start
 impl Solution {
     pub fn merge_alternately(word1: String, word2: String) -> String {
-        let zip_len = std::cmp::min(word1.len(), word2.len());
-        let (word1_zip, word1_rest) = word1.split_at(zip_len);
-        let (word2_zip, word2_rest) = word2.split_at(zip_len);
+        let [word1_len, word2_len] = [&word1, &word2].map(|w| w.len());
+        let mut chars1 = word1.chars();
+        let mut chars2 = word2.chars();
         let mut res = String::new();
-        for (c1, c2) in word1_zip.chars().zip(word2_zip.chars()) {
-            res.push(c1);
-            res.push(c2);
+        for i in 0..std::cmp::max(word1_len, word2_len) {
+            if i < word1_len {
+                res.push(chars1.next().unwrap())
+            }
+            if i < word2_len {
+                res.push(chars2.next().unwrap())
+            }
         }
-        res.push_str(word1_rest);
-        res.push_str(word2_rest);
         res
     }
 }
