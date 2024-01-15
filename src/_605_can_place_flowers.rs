@@ -11,19 +11,27 @@ impl Solution {
         counter.see_empty();
         flowerbed.iter().for_each(|i| counter.see_plot(*i));
         counter.see_empty();
-        n <= counter.placable_count
+        n <= counter.capacity_count
     }
 }
 
-#[derive(Default)]
 struct Counter {
-    continuous_empties: u8,
-    placable_count: i32,
+    consecutive_empties: ConsecutiveEmpties,
+    capacity_count: i32,
+}
+
+enum ConsecutiveEmpties {
+    Zero,
+    One,
+    Two,
 }
 
 impl Counter {
     fn new() -> Self {
-        Self::default()
+        Self {
+            consecutive_empties: ConsecutiveEmpties::Zero,
+            capacity_count: 0,
+        }
     }
     fn see_plot(&mut self, plot: i32) {
         match plot {
@@ -33,14 +41,27 @@ impl Counter {
         }
     }
     fn see_empty(&mut self) {
-        self.continuous_empties += 1;
-        if 3 <= self.continuous_empties {
-            self.placable_count += 1;
-            self.continuous_empties = 1;
+        if let ConsecutiveEmpties::Two = self.consecutive_empties {
+            self.capacity_count += 1;
+            self.consecutive_empties.reset()
         }
+        self.consecutive_empties.inc()
     }
     fn see_planted(&mut self) {
-        self.continuous_empties = 0;
+        self.consecutive_empties.reset()
+    }
+}
+
+impl ConsecutiveEmpties {
+    fn inc(&mut self) {
+        *self = match self {
+            Self::Zero => Self::One,
+            Self::One => Self::Two,
+            _ => unreachable!(),
+        }
+    }
+    fn reset(&mut self) {
+        *self = Self::Zero
     }
 }
 // @lc code=end
