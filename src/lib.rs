@@ -605,7 +605,7 @@
 // mod _602_friend_requests_ii_who_has_the_most_friends;
 // mod _603_consecutive_available_seats;
 // mod _604_design_compressed_string_iterator;
-// mod _605_can_place_flowers;
+mod _605_can_place_flowers;
 // mod _606_construct_string_from_binary_tree;
 // mod _607_sales_person;
 // mod _608_tree_node;
