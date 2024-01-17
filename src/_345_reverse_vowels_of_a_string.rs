@@ -6,28 +6,36 @@
 
 // @lc code=start
 impl Solution {
-    pub fn reverse_vowels(mut s: String) -> String {
-        let vowel_indices = s
-            .chars()
-            .enumerate()
-            .filter_map(|(i, c)| Self::is_vowel(c).then_some(i))
-            .collect::<Vec<_>>();
+    pub fn reverse_vowels(s: String) -> String {
+        let mut i: usize = 0;
+        let mut j: usize = s.chars().count() - 1;
+        let mut output = s.into_bytes();
+        let is_vowel = |b: &u8| {
+            matches!(
+                b,
+                b'a' | b'e' | b'i' | b'o' | b'u' | b'A' | b'E' | b'I' | b'O' | b'U'
+            )
+        };
+        while i < j {
+            let head = output.get(i).unwrap();
+            let tail = output.get(j).unwrap();
+            let head_is_vowel = is_vowel(head);
+            let tail_is_vowel = is_vowel(tail);
 
-        for (l_vowel_idx, r_vowel_idx) in vowel_indices
-            .iter()
-            .zip(vowel_indices.iter().rev())
-            .take_while(|(l, r)| l < r)
-        {
-            let r_char = s.remove(*r_vowel_idx);
-            let l_char = s.remove(*l_vowel_idx);
-            s.insert(*l_vowel_idx, r_char);
-            s.insert(*r_vowel_idx, l_char);
+            if head_is_vowel && tail_is_vowel {
+                output.swap(i, j);
+                i += 1;
+                j -= 1;
+            } else if head_is_vowel {
+                j -= 1;
+            } else if tail_is_vowel {
+                i += 1;
+            } else {
+                i += 1;
+                j -= 1;
+            }
         }
-        s
-    }
-    #[inline]
-    fn is_vowel(c: char) -> bool {
-        "AEIOUaeiou".contains(c)
+        String::from_utf8(output).unwrap()
     }
 }
 // @lc code=end
