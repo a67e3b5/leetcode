@@ -345,7 +345,7 @@
 // mod _342_power_of_four;
 // mod _343_integer_break;
 // mod _344_reverse_string;
-// mod _345_reverse_vowels_of_a_string;
+mod _345_reverse_vowels_of_a_string;
 // mod _346_moving_average_from_data_stream;
 // mod _347_top_k_frequent_elements;
 // mod _348_design_tic_tac_toe;
