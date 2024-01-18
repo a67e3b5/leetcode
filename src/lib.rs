@@ -283,7 +283,7 @@
 // mod _280_wiggle_sort;
 // mod _281_zigzag_iterator;
 // mod _282_expression_add_operators;
-// mod _283_move_zeroes;
+mod _283_move_zeroes;
 // mod _284_peeking_iterator;
 // mod _285_inorder_successor_in_bst;
 // mod _286_walls_and_gates;
