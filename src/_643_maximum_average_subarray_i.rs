@@ -7,33 +7,18 @@
 // @lc code=start
 impl Solution {
     pub fn find_max_average(nums: Vec<i32>, k: i32) -> f64 {
-        let mut max = f64::MIN;
-        for offset in 0..=(nums.len() - k as usize) {
-            let array = nums.get(offset..offset + k as usize).unwrap();
-            let avg: f64 = array.iter().sum::<i32>() as f64 / k as f64;
-            if max < avg {
-                max = avg;
+        let k = k as usize;
+        let mut last_sum = nums[0..k].iter().sum::<i32>();
+        let mut max_sum = last_sum;
+        for offset in 0..(nums.len() - k) {
+            last_sum = last_sum - nums[offset] + nums[offset + k];
+            if max_sum < last_sum {
+                max_sum = last_sum;
             }
         }
-        max
+        max_sum as f64 / k as f64
     }
 }
 // @lc code=end
 
 struct Solution;
-
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-
-//     #[test]
-//     fn test() {
-//         let samples = [("abc", "ahbgdc", true), ("axc", "ahbgdc", false)];
-//         for (sub, sup, res) in samples {
-//             assert_eq!(
-//                 Solution::is_subsequence(sub.to_string(), sup.to_string()),
-//                 res
-//             );
-//         }
-//     }
-// }
