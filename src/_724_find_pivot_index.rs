@@ -10,12 +10,13 @@ impl Solution {
         let mut l_sum = 0;
         let mut r_sum = nums.iter().sum::<i32>();
 
-        for (i, num) in nums.iter().enumerate() {
-            r_sum -= num;
+        #[allow(clippy::needless_range_loop)]
+        for i in 0..nums.len() {
+            r_sum -= nums[i];
             if l_sum == r_sum {
                 return i as i32;
             }
-            l_sum += num;
+            l_sum += nums[i];
         }
         -1
     }
