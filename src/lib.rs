@@ -643,7 +643,7 @@ mod _605_can_place_flowers;
 // mod _640_solve_the_equation;
 // mod _641_design_circular_deque;
 // mod _642_design_search_autocomplete_system;
-// mod _643_maximum_average_subarray_i;
+mod _643_maximum_average_subarray_i;
 // mod _644_maximum_average_subarray_ii;
 // mod _645_set_mismatch;
 // mod _646_maximum_length_of_pair_chain;
