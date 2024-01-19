@@ -2215,7 +2215,7 @@ mod _1768_merge_strings_alternately;
 // mod _2212_maximum_points_in_an_archery_competition;
 // mod _2213_longest_substring_of_one_repeating_character;
 // mod _2214_minimum_health_to_beat_game;
-// mod _2215_find_the_difference_of_two_arrays;
+mod _2215_find_the_difference_of_two_arrays;
 // mod _2216_minimum_deletions_to_make_array_beautiful;
 // mod _2217_find_palindrome_with_fixed_length;
 // mod _2218_maximum_value_of_k_coins_from_piles;
