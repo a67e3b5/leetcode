@@ -1732,7 +1732,7 @@ mod _1431_kids_with_the_greatest_number_of_candies;
 // mod _1729_find_followers_count;
 // mod _1730_shortest_path_to_get_food;
 // mod _1731_the_number_of_employees_which_report_to_each_employee;
-// mod _1732_find_the_highest_altitude;
+mod _1732_find_the_highest_altitude;
 // mod _1733_minimum_number_of_people_to_teach;
 // mod _1734_decode_xo_red_permutation;
 // mod _1735_count_ways_to_make_array_with_product;
