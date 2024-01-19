@@ -7,45 +7,40 @@
 // @lc code=start
 impl Solution {
     pub fn pivot_index(nums: Vec<i32>) -> i32 {
-        let nums_len = nums.len() as i32;
-
-        if nums_len == 1 {
-            return 0;
+        let sum = nums.iter().sum::<i32>();
+        let lr_sums = nums.iter().map(|n| sum - n);
+        let l_sums = std::iter::once(&0).chain(nums.iter()).scan(0, |st, x| {
+            *st += *x;
+            Some(*st)
+        });
+        if let Some(pivot_i) = lr_sums
+            .zip(l_sums)
+            .enumerate()
+            .find_map(|(i, (lr, l))| (lr == l * 2).then_some(i))
+        {
+            return pivot_i as i32;
         }
-
-        let mut l_num;
-        let mut num = nums[0];
-        let mut r_num = nums[1];
-
-        let mut l_sum = 0;
-        let mut r_sum = nums.iter().skip(1).sum::<i32>();
-
-        if 0 == r_sum {
-            return 0;
-        }
-
-        for (next_idx, next_num) in nums.iter().enumerate().skip(2) {
-            l_num = num;
-            num = r_num;
-            r_num = *next_num;
-
-            l_sum += l_num;
-            r_sum -= num;
-
-            if l_sum == r_sum {
-                return next_idx as i32 - 1;
-            }
-        }
-
-        l_sum += num;
-
-        if l_sum == 0 {
-            return nums_len - 1;
-        }
-
         -1
     }
 }
 // @lc code=end
 
 struct Solution;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        let samples = [
+            (vec![1], 0),
+            (vec![1, 1], -1),
+            (vec![0, 1, -1, 0], 0),
+            (vec![1, -1, 0], 2),
+        ];
+        for (src, res) in samples {
+            assert_eq!(Solution::pivot_index(src), res)
+        }
+    }
+}
