@@ -724,7 +724,7 @@ mod _643_maximum_average_subarray_i;
 // mod _721_accounts_merge;
 // mod _722_remove_comments;
 // mod _723_candy_crush;
-// mod _724_find_pivot_index;
+mod _724_find_pivot_index;
 // mod _725_split_linked_list_in_parts;
 // mod _726_number_of_atoms;
 // mod _727_minimum_window_subsequence;
