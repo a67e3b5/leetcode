@@ -392,7 +392,7 @@ mod _345_reverse_vowels_of_a_string;
 // mod _389_find_the_difference;
 // mod _390_elimination_game;
 // mod _391_perfect_rectangle;
-// mod _392_is_subsequence;
+mod _392_is_subsequence;
 // mod _393_utf_8_validation;
 // mod _394_decode_string;
 // mod _395_longest_substring_with_at_least_k_repeating_characters;
