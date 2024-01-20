@@ -7,18 +7,13 @@
 // @lc code=start
 impl Solution {
     pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        Self::_internal(head, None)
-    }
-    fn _internal(head: Option<Box<ListNode>>, out: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        if let Some(node) = head {
-            let out = Some(Box::new(ListNode {
-                val: node.val,
-                next: out,
-            }));
-            Self::_internal(node.next, out)
-        } else {
-            out
+        let (mut prev, mut curr) = (None, head);
+        while let Some(mut node) = curr {
+            curr = node.next;
+            node.next = prev;
+            prev = Some(node);
         }
+        prev
     }
 }
 // @lc code=end
