@@ -23,14 +23,9 @@ impl RecentCounter {
     }
 
     fn ping(&mut self, t: i32) -> i32 {
-        while let Some(&s) = self.lap_times.front() {
-            if t - 3000 <= s {
-                break;
-            }
-            self.lap_times.pop_front();
-        }
+        let since = self.lap_times.partition_point(|&s| s < t - 3000);
         self.lap_times.push_back(t);
-        self.lap_times.len() as i32
+        self.lap_times.len() as i32 - since as i32
     }
 }
 
