@@ -7,7 +7,6 @@
 // @lc code=start
 struct RecentCounter {
     lap_times: VecDeque<i32>,
-    lap_times_len: i32,
 }
 
 /**
@@ -20,7 +19,6 @@ impl RecentCounter {
     fn new() -> Self {
         Self {
             lap_times: VecDeque::new(),
-            lap_times_len: 0,
         }
     }
 
@@ -30,11 +28,9 @@ impl RecentCounter {
                 break;
             }
             self.lap_times.pop_front();
-            self.lap_times_len -= 1;
         }
         self.lap_times.push_back(t);
-        self.lap_times_len += 1;
-        self.lap_times_len
+        self.lap_times.len() as i32
     }
 }
 
