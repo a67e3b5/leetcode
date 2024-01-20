@@ -6,28 +6,24 @@
 
 // @lc code=start
 struct RecentCounter {
-    lap_times: VecDeque<i32>,
+    lap_times: Vec<i32>,
 }
 
 /**
  * `&self` means the method takes an immutable reference.
  * If you need a mutable reference, change it to `&mut self` instead.
  */
-use std::collections::VecDeque;
-
 impl RecentCounter {
     fn new() -> Self {
-        Self {
-            lap_times: VecDeque::new(),
-        }
+        Self { lap_times: vec![] }
     }
 
     fn ping(&mut self, t: i32) -> i32 {
-        self.lap_times.push_back(t);
-        while self.lap_times[0] < t - 3000 {
-            self.lap_times.pop_front();
+        self.lap_times.push(t);
+        match self.lap_times.binary_search(&(t - 3000)) {
+            Ok(l_edge) => (self.lap_times.len() - l_edge) as i32,
+            Err(first_in_range) => (self.lap_times.len() - first_in_range) as i32,
         }
-        self.lap_times.len() as i32
     }
 }
 
