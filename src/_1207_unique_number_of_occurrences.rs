@@ -5,7 +5,6 @@
  */
 
 // @lc code=start
-// FIXME flaky
 impl Solution {
     pub fn unique_occurrences(arr: Vec<i32>) -> bool {
         use std::collections::HashMap;
@@ -16,13 +15,14 @@ impl Solution {
                 .and_modify(|count| *count += 1)
                 .or_insert(1);
         }
-        let keys_len = occurrences.len();
-        let dedup_values_len = {
-            let mut values = occurrences.values().collect::<Vec<_>>();
-            values.dedup();
-            values.len()
-        };
-        keys_len == dedup_values_len
+        let mut seen_values = Vec::new();
+        for v in occurrences.values() {
+            if seen_values.contains(v) {
+                return false;
+            }
+            seen_values.push(*v)
+        }
+        true
     }
 }
 // @lc code=end
