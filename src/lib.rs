@@ -872,7 +872,7 @@ mod _724_find_pivot_index;
 // mod _869_reordered_power_of_2;
 // mod _870_advantage_shuffle;
 // mod _871_minimum_number_of_refueling_stops;
-// mod _872_leaf_similar_trees;
+mod _872_leaf_similar_trees;
 // mod _873_length_of_longest_fibonacci_subsequence;
 // mod _874_walking_robot_simulation;
 // mod _875_koko_eating_bananas;
