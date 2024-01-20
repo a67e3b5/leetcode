@@ -22,13 +22,12 @@ impl RecentCounter {
         }
     }
 
-    #[inline]
     fn ping(&mut self, t: i32) -> i32 {
-        while let Some(&s) = self.lap_times.front() {
+        while let Some(s) = self.lap_times.pop_front() {
             if t - 3000 <= s {
+                self.lap_times.push_front(s);
                 break;
             }
-            self.lap_times.pop_front();
         }
         self.lap_times.push_back(t);
         self.lap_times.len() as i32
