@@ -22,7 +22,9 @@ impl RecentCounter {
 
     fn ping(&mut self, t: i32) -> i32 {
         self.lap_times.push(t);
-        self.lap_times.retain(|s| t - 3000 <= *s);
+        if let Some(last_expired) = self.lap_times.iter().rposition(|&s| s < t - 3000) {
+            self.lap_times.drain(..=last_expired);
+        }
         self.lap_times.len() as i32
     }
 }
