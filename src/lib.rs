@@ -933,7 +933,7 @@ mod _724_find_pivot_index;
 // mod _930_binary_subarrays_with_sum;
 // mod _931_minimum_falling_path_sum;
 // mod _932_beautiful_array;
-// mod _933_number_of_recent_calls;
+mod _933_number_of_recent_calls;
 // mod _934_shortest_bridge;
 // mod _935_knight_dialer;
 // mod _936_stamping_the_sequence;
