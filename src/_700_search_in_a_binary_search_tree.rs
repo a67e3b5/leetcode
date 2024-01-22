@@ -10,21 +10,17 @@ use std::cmp::Ordering;
 use std::rc::Rc;
 impl Solution {
     pub fn search_bst(
-        root: Option<Rc<RefCell<TreeNode>>>,
+        mut root: Option<Rc<RefCell<TreeNode>>>,
         val: i32,
     ) -> Option<Rc<RefCell<TreeNode>>> {
-        Self::_search_bst(&root, val)
-    }
-    fn _search_bst(
-        root: &Option<Rc<RefCell<TreeNode>>>,
-        val: i32,
-    ) -> Option<Rc<RefCell<TreeNode>>> {
-        let node = root.as_ref()?;
-        match node.borrow().val.cmp(&val) {
-            Ordering::Equal => root.to_owned(),
-            Ordering::Greater => Self::_search_bst(&node.borrow().left, val),
-            Ordering::Less => Self::_search_bst(&node.borrow().right, val),
+        while let Some(node) = root {
+            match node.borrow().val.cmp(&val) {
+                Ordering::Equal => return Some(node.clone()),
+                Ordering::Greater => root = node.borrow().left.to_owned(),
+                Ordering::Less => root = node.borrow().right.to_owned(),
+            }
         }
+        None
     }
 }
 // @lc code=end
