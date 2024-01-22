@@ -700,7 +700,7 @@ mod _643_maximum_average_subarray_i;
 // mod _697_degree_of_an_array;
 // mod _698_partition_to_k_equal_sum_subsets;
 // mod _699_falling_squares;
-// mod _700_search_in_a_binary_search_tree;
+mod _700_search_in_a_binary_search_tree;
 // mod _701_insert_into_a_binary_search_tree;
 // mod _702_search_in_a_sorted_array_of_unknown_size;
 // mod _703_kth_largest_element_in_a_stream;
