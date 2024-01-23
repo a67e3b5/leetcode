@@ -374,7 +374,7 @@ mod _345_reverse_vowels_of_a_string;
 // mod _371_sum_of_two_integers;
 // mod _372_super_pow;
 // mod _373_find_k_pairs_with_smallest_sums;
-// mod _374_guess_number_higher_or_lower;
+mod _374_guess_number_higher_or_lower;
 // mod _375_guess_number_higher_or_lower_ii;
 // mod _376_wiggle_subsequence;
 // mod _377_combination_sum_iv;
