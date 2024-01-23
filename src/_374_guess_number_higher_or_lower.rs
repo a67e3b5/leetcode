@@ -10,22 +10,17 @@ impl Solution {
     unsafe fn guessNumber(n: i32) -> i32 {
         let mut num = 1;
         let mut shift = n - 1;
-        let mut last_hint = -1;
         loop {
-            let hint = guess(num);
-            match hint {
+            match guess(num) {
                 0 => return num,
                 1 => num += shift,
                 -1 => num -= shift,
                 _ => unreachable!(),
             }
-            if last_hint * hint == -1 {
-                shift /= 2;
-                if shift == 0 {
-                    shift = 1
-                }
+            shift /= 2;
+            if shift == 0 {
+                shift = 1
             }
-            last_hint = hint;
         }
     }
 }
