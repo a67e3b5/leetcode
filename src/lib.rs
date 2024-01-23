@@ -338,7 +338,7 @@ mod _283_move_zeroes;
 // mod _335_self_crossing;
 // mod _336_palindrome_pairs;
 // mod _337_house_robber_iii;
-// mod _338_counting_bits;
+mod _338_counting_bits;
 // mod _339_nested_list_weight_sum;
 // mod _340_longest_substring_with_at_most_k_distinct_characters;
 // mod _341_flatten_nested_list_iterator;
