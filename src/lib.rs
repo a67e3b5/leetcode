@@ -1137,7 +1137,7 @@ mod _1071_greatest_common_divisor_of_strings;
 // mod _1134_armstrong_number;
 // mod _1135_connecting_cities_with_minimum_cost;
 // mod _1136_parallel_courses;
-// mod _1137_n_th_tribonacci_number;
+mod _1137_n_th_tribonacci_number;
 // mod _1138_alphabet_board_path;
 // mod _1139_largest_1_bordered_square;
 // mod _1140_stone_game_ii;
