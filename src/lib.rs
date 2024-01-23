@@ -746,7 +746,7 @@ mod _724_find_pivot_index;
 // mod _743_network_delay_time;
 // mod _744_find_smallest_letter_greater_than_target;
 // mod _745_prefix_and_suffix_search;
-// mod _746_min_cost_climbing_stairs;
+mod _746_min_cost_climbing_stairs;
 // mod _747_largest_number_at_least_twice_of_others;
 // mod _748_shortest_completing_word;
 // mod _749_contain_virus;
