@@ -6,13 +6,16 @@
 
 // @lc code=start
 impl Solution {
-    pub fn tribonacci(n: i32) -> i32 {
-        match n {
-            0 => 0,
-            1 => 1,
-            2 => 1,
-            _ => Self::tribonacci(n - 3) + Self::tribonacci(n - 2) + Self::tribonacci(n - 1),
+    pub fn tribonacci(mut n: i32) -> i32 {
+        let (mut t0, mut t1, mut t2) = (0, 1, 1);
+        while n > 0 {
+            let t3 = t0 + t1 + t2;
+            t0 = t1;
+            t1 = t2;
+            t2 = t3;
+            n -= 1;
         }
+        t0
     }
 }
 // @lc code=end
