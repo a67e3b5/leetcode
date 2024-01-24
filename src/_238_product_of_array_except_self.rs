@@ -7,15 +7,24 @@
 // @lc code=start
 impl Solution {
     pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
-        let mut ans = vec![1; nums.len()];
-        for (i, num) in nums.into_iter().enumerate() {
-            ans.iter_mut().enumerate().for_each(|(j, prod)| {
-                if i != j {
-                    *prod *= num
-                }
+        let l_arr = nums.iter().scan(1, |s, x| {
+            let res = *s;
+            *s *= x;
+            Some(res)
+        });
+        let r_arr = nums
+            .iter()
+            .rev()
+            .scan(1, |s, x| {
+                let res = *s;
+                *s *= x;
+                Some(res)
             })
-        }
-        ans
+            .collect::<Vec<_>>()
+            .into_iter()
+            .rev();
+
+        l_arr.zip(r_arr).map(|(l, r)| l * r).collect()
     }
 }
 // @lc code=end
