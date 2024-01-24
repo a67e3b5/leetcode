@@ -334,7 +334,7 @@ mod _283_move_zeroes;
 // mod _331_verify_preorder_serialization_of_a_binary_tree;
 // mod _332_reconstruct_itinerary;
 // mod _333_largest_bst_subtree;
-// mod _334_increasing_triplet_subsequence;
+mod _334_increasing_triplet_subsequence;
 // mod _335_self_crossing;
 // mod _336_palindrome_pairs;
 // mod _337_house_robber_iii;
