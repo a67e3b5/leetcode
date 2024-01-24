@@ -7,18 +7,13 @@
 // @lc code=start
 impl Solution {
     pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
-        let mut ans = vec![0; nums.len()];
-        for (i, a) in ans.iter_mut().enumerate() {
-            *a = nums.iter().enumerate().fold(
-                1,
-                |acc, (j, &num)| {
-                    if i != j {
-                        acc * num
-                    } else {
-                        acc
-                    }
-                },
-            )
+        let mut ans = vec![1; nums.len()];
+        for (i, num) in nums.into_iter().enumerate() {
+            ans.iter_mut().enumerate().for_each(|(j, prod)| {
+                if i != j {
+                    *prod *= num
+                }
+            })
         }
         ans
     }
