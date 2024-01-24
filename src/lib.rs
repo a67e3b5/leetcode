@@ -151,7 +151,7 @@ mod _136_single_number;
 // mod _148_sort_list;
 // mod _149_max_points_on_a_line;
 // mod _150_evaluate_reverse_polish_notation;
-// mod _151_reverse_words_in_a_string;
+mod _151_reverse_words_in_a_string;
 // mod _152_maximum_product_subarray;
 // mod _153_find_minimum_in_rotated_sorted_array;
 // mod _154_find_minimum_in_rotated_sorted_array_ii;
