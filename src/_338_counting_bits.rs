@@ -8,18 +8,15 @@
 impl Solution {
     pub fn count_bits(n: i32) -> Vec<i32> {
         let n = n as usize;
-        let mut ans = vec![0, 1];
-        let mut add = vec![1];
-        while ans.len() < n + 1 {
-            let mut tmp = vec![];
-            for &num in &add {
-                tmp.push(num);
-                tmp.push(num + 1);
+        let mut ans = vec![0; n + 1];
+        let mut i = 0;
+        while i <= n / 2 {
+            ans[2 * i] = ans[i];
+            if 2 * i < n {
+                ans[2 * i + 1] = ans[i] + 1;
             }
-            ans.extend(&tmp);
-            add = tmp;
+            i += 1;
         }
-        ans.truncate(n + 1);
         ans
     }
 }
