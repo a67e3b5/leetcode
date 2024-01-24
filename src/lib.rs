@@ -238,7 +238,7 @@ mod _206_reverse_linked_list;
 // mod _235_lowest_common_ancestor_of_a_binary_search_tree;
 // mod _236_lowest_common_ancestor_of_a_binary_tree;
 // mod _237_delete_node_in_a_linked_list;
-// mod _238_product_of_array_except_self;
+mod _238_product_of_array_except_self;
 // mod _239_sliding_window_maximum;
 // mod _240_search_a_2_d_matrix_ii;
 // mod _241_different_ways_to_add_parentheses;
