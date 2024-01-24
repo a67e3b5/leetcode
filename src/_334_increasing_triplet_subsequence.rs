@@ -9,13 +9,12 @@ impl Solution {
     pub fn increasing_triplet(nums: Vec<i32>) -> bool {
         let (mut n0, mut n1) = (nums[0], i32::MAX);
         for num in nums {
-            if n1 < num {
-                return true;
-            }
-            if n0 < num {
+            if num <= n0 {
+                n0 = num;
+            } else if num <= n1 {
                 n1 = num;
             } else {
-                n0 = num;
+                return true;
             }
         }
         false
