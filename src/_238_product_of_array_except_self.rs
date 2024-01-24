@@ -7,24 +7,16 @@
 // @lc code=start
 impl Solution {
     pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
-        let l_arr = nums.iter().scan(1, |s, x| {
-            let res = *s;
-            *s *= x;
-            Some(res)
-        });
-        let r_arr = nums
-            .iter()
-            .rev()
-            .scan(1, |s, x| {
-                let res = *s;
-                *s *= x;
-                Some(res)
-            })
-            .collect::<Vec<_>>()
-            .into_iter()
-            .rev();
-
-        l_arr.zip(r_arr).map(|(l, r)| l * r).collect()
+        let len = nums.len();
+        let mut ans = vec![1; len];
+        let (mut l_acc, mut r_acc) = (1, 1);
+        for i in 0..len {
+            ans[i] *= l_acc;
+            ans[len - 1 - i] *= r_acc;
+            l_acc *= nums[i];
+            r_acc *= nums[len - 1 - i];
+        }
+        ans
     }
 }
 // @lc code=end
