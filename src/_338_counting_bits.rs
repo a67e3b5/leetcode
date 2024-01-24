@@ -9,13 +9,8 @@ impl Solution {
     pub fn count_bits(n: i32) -> Vec<i32> {
         let n = n as usize;
         let mut ans = vec![0; n + 1];
-        let mut i = 0;
-        while i <= n / 2 {
-            ans[2 * i] = ans[i];
-            if 2 * i < n {
-                ans[2 * i + 1] = ans[i] + 1;
-            }
-            i += 1;
+        for i in 1..=n {
+            ans[i] = ans[i >> 1] + (i & 1) as i32;
         }
         ans
     }
