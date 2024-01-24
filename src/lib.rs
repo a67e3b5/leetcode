@@ -136,7 +136,7 @@ mod _104_maximum_depth_of_binary_tree;
 // mod _133_clone_graph;
 // mod _134_gas_station;
 // mod _135_candy;
-// mod _136_single_number;
+mod _136_single_number;
 // mod _137_single_number_ii;
 // mod _138_copy_list_with_random_pointer;
 // mod _139_word_break;
