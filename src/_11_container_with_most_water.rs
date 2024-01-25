@@ -16,13 +16,14 @@ impl Solution {
         while l_idx < r_idx {
             let area_l_shrink = area(l_idx + 1, r_idx);
             let area_r_shrink = area(l_idx, r_idx - 1);
+            dbg!(&l_idx, &r_idx, &ans, &area_l_shrink, &area_r_shrink);
             if ans < max(area_l_shrink, area_r_shrink) {
                 if area_l_shrink < area_r_shrink {
                     ans = area_r_shrink;
-                    l_idx += 1;
+                    r_idx -= 1;
                 } else {
                     ans = area_l_shrink;
-                    r_idx -= 1;
+                    l_idx += 1;
                 }
             } else {
                 l_idx += 1;
@@ -35,3 +36,16 @@ impl Solution {
 // @lc code=end
 
 struct Solution;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        let samples = [(vec![2, 3, 10, 5, 7, 8, 9], 36)];
+        for (input, output) in samples {
+            assert_eq!(Solution::max_area(input), output);
+        }
+    }
+}
