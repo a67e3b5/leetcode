@@ -5,26 +5,29 @@
  */
 
 // @lc code=start
-use std::collections::VecDeque;
+use std::cmp::{max, min};
 
 impl Solution {
     pub fn max_area(height: Vec<i32>) -> i32 {
-        let mut height = height
-            .into_iter()
-            .map(|i| i as usize)
-            .collect::<VecDeque<_>>();
-        let mut ans = 0;
-        while let Some(&h_l) = height.get(0) {
-            let max_capacity = height
-                .iter()
-                .enumerate()
-                .map(|(i, &h_r)| i * h_l.min(h_r))
-                .max()
-                .unwrap();
-            if ans < max_capacity {
-                ans = max_capacity;
+        let height = height.into_iter().map(|h| h as usize).collect::<Vec<_>>();
+        let area = |l_idx: usize, r_idx: usize| (r_idx - l_idx) * min(height[l_idx], height[r_idx]);
+        let (mut l_idx, mut r_idx) = (0_usize, height.len() - 1);
+        let mut ans = area(l_idx, r_idx);
+        while l_idx < r_idx {
+            let area_l_shrink = area(l_idx + 1, r_idx);
+            let area_r_shrink = area(l_idx, r_idx - 1);
+            if ans < max(area_l_shrink, area_r_shrink) {
+                if area_l_shrink < area_r_shrink {
+                    ans = area_r_shrink;
+                    l_idx += 1;
+                } else {
+                    ans = area_l_shrink;
+                    r_idx -= 1;
+                }
+            } else {
+                l_idx += 1;
+                r_idx -= 1;
             }
-            height.pop_front();
         }
         ans as i32
     }
