@@ -1456,7 +1456,7 @@ mod _1431_kids_with_the_greatest_number_of_candies;
 // mod _1453_maximum_number_of_darts_inside_of_a_circular_dartboard;
 // mod _1454_active_users;
 // mod _1455_check_if_a_word_occurs_as_a_prefix_of_any_word_in_a_sentence;
-// mod _1456_maximum_number_of_vowels_in_a_substring_of_given_length;
+mod _1456_maximum_number_of_vowels_in_a_substring_of_given_length;
 // mod _1457_pseudo_palindromic_paths_in_a_binary_tree;
 // mod _1458_max_dot_product_of_two_subsequences;
 // mod _1459_rectangles_area;
