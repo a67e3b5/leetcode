@@ -7,41 +7,19 @@
 // @lc code=start
 impl Solution {
     pub fn max_area(height: Vec<i32>) -> i32 {
-        let hs_desc = {
-            let mut res = height
-                .into_iter()
-                .map(|i| i as usize)
-                .enumerate()
-                .collect::<Vec<_>>();
-            res.sort_by_key(|(_, h)| *h);
-            res.reverse();
-            res
-        };
-        let r_idx = hs_desc.len() - 1;
-        let mut ans = 0;
-        let mut skip = 0;
-
-        for (i0, h0) in &hs_desc {
-            skip += 1;
-            if 0 == *h0 {
-                continue;
-            }
-            let min_w = ans / h0 + 1;
-            let (range_l, range_r) = (0..=(i0.saturating_sub(min_w)), (i0 + min_w)..=r_idx);
-            let Some(max_area_candidate) = hs_desc
-                .iter()
-                .skip(skip)
-                .filter(|(i, _)| range_l.contains(i) || range_r.contains(i))
-                .map(|(i, h)| i.abs_diff(*i0) * h)
-                .max()
-            else {
-                continue;
-            };
-            if ans < max_area_candidate {
-                ans = max_area_candidate;
+        let mut result = 0;
+        let mut iter = height.iter().enumerate();
+        let mut p1 = iter.next();
+        let mut p2 = iter.next_back();
+        while let (Some((i, h1)), Some((j, h2))) = (p1, p2) {
+            result = result.max(h1.min(h2) * (j - i) as i32);
+            if h1 < h2 {
+                p1 = iter.next();
+            } else {
+                p2 = iter.next_back();
             }
         }
-        ans as i32
+        result
     }
 }
 // @lc code=end
