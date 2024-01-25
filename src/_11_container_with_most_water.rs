@@ -5,38 +5,39 @@
  */
 
 // @lc code=start
-use std::collections::VecDeque;
-
 impl Solution {
     pub fn max_area(height: Vec<i32>) -> i32 {
-        let mut height = height
-            .into_iter()
-            .map(|i| i as usize)
-            .collect::<VecDeque<_>>();
+        let mut height = height.into_iter().map(|i| i as usize).collect::<Vec<_>>();
         let mut ans = 0;
         let mut max_height = 0;
-        while let Some(&h_l) = height.get(0) {
-            if h_l <= max_height {
-                height.pop_front();
+        let mut r_idx = height.len();
+        while let Some(r_h) = height.pop() {
+            r_idx -= 1;
+            if r_h <= max_height {
                 continue; // optimization
             } else {
-                max_height = h_l;
+                max_height = r_h;
             }
-            let skip = ans / h_l + 1;
-            let Some(max_area_in_this_l) = height
+            let r_skip = ans / r_h;
+            let Some(max_area_in_this_r) = height
                 .iter()
                 .enumerate()
-                .skip(skip) // optimization
-                .map(|(i, &h_r)| i * h_l.min(h_r))
+                .take(r_idx.checked_sub(r_skip).unwrap_or_default()) // optimization
+                .scan(0, |max_h, (i, &h)| {
+                    (*max_h < h)
+                        .then(|| {
+                            *max_h = h;
+                            (r_idx - i) * h.min(r_h)
+                        })
+                        .or(Some(0)) // optimization
+                })
                 .max()
             else {
-                height.pop_front();
                 continue;
             };
-            if ans < max_area_in_this_l {
-                ans = max_area_in_this_l;
+            if ans < max_area_in_this_r {
+                ans = max_area_in_this_r;
             }
-            height.pop_front();
         }
         ans as i32
     }
