@@ -8,8 +8,8 @@
 impl Solution {
     pub fn max_vowels(s: String, k: i32) -> i32 {
         let k = k as usize;
-        let is_vowel = |b: &u8| matches!(b, b'a' | b'e' | b'i' | b'o' | b'u');
-        let booleans = s.into_bytes().iter().map(is_vowel).collect::<Vec<_>>();
+        let is_vowel = |b: u8| matches!(b, b'a' | b'e' | b'i' | b'o' | b'u');
+        let booleans = s.into_bytes().into_iter().map(is_vowel).collect::<Vec<_>>();
         let mut num_vowels = booleans.iter().take(k).filter(|&&b| b).count();
         let mut ans = num_vowels;
         let mut i = 0;
