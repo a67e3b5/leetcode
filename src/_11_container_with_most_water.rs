@@ -7,36 +7,38 @@
 // @lc code=start
 impl Solution {
     pub fn max_area(height: Vec<i32>) -> i32 {
-        let mut height = height.into_iter().map(|i| i as usize).collect::<Vec<_>>();
-        let mut ans = 0;
-        let mut max_height = 0;
-        let mut r_idx = height.len();
-        while let Some(r_h) = height.pop() {
-            r_idx -= 1;
-            if r_h <= max_height {
-                continue; // optimization
-            } else {
-                max_height = r_h;
-            }
-            let r_skip = ans / r_h;
-            let Some(max_area_in_this_r) = height
-                .iter()
+        let hs_desc = {
+            let mut res = height
+                .into_iter()
+                .map(|i| i as usize)
                 .enumerate()
-                .take(r_idx.checked_sub(r_skip).unwrap_or_default()) // optimization
-                .scan(0, |max_h, (i, &h)| {
-                    (*max_h < h)
-                        .then(|| {
-                            *max_h = h;
-                            (r_idx - i) * h.min(r_h)
-                        })
-                        .or(Some(0)) // optimization
-                })
+                .collect::<Vec<_>>();
+            res.sort_by_key(|(_, h)| *h);
+            res.reverse();
+            res
+        };
+        let r_idx = hs_desc.len() - 1;
+        let mut ans = 0;
+        let mut skip = 0;
+
+        for (i0, h0) in &hs_desc {
+            skip += 1;
+            if 0 == *h0 {
+                continue;
+            }
+            let min_w = ans / h0 + 1;
+            let (range_l, range_r) = (0..=(i0.saturating_sub(min_w)), (i0 + min_w)..=r_idx);
+            let Some(max_area_candidate) = hs_desc
+                .iter()
+                .skip(skip)
+                .filter(|(i, _)| range_l.contains(i) || range_r.contains(i))
+                .map(|(i, h)| i.abs_diff(*i0) * h)
                 .max()
             else {
                 continue;
             };
-            if ans < max_area_in_this_r {
-                ans = max_area_in_this_r;
+            if ans < max_area_candidate {
+                ans = max_area_candidate;
             }
         }
         ans as i32
