@@ -3006,17 +3006,23 @@ mod _2215_find_the_difference_of_two_arrays;
 // mod _3003_maximize_the_number_of_partitions_after_operations;
 // mod _3004_maximum_subtree_of_the_same_color;
 
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+impl Solution {
+    pub fn add(left: usize, right: usize) -> usize {
+        left + right
+    }
 }
+
+struct Solution;
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn test() {
+        let samples = [((2, 2), 4)];
+        for (input, output) in samples {
+            assert_eq!(Solution::add(input.0, input.1), output);
+        }
     }
 }
