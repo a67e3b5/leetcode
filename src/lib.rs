@@ -1004,7 +1004,7 @@ mod _933_number_of_recent_calls;
 // mod _1001_grid_illumination;
 // mod _1002_find_common_characters;
 // mod _1003_check_if_word_is_valid_after_substitutions;
-// mod _1004_max_consecutive_ones_iii;
+mod _1004_max_consecutive_ones_iii;
 // mod _1005_maximize_sum_of_array_after_k_negations;
 // mod _1006_clumsy_factorial;
 // mod _1007_minimum_domino_rotations_for_equal_row;
