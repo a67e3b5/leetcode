@@ -17,13 +17,19 @@ impl Solution {
         for c in word2.chars() {
             dict2.entry(c).and_modify(|v| *v += 1).or_insert(1);
         }
+        let mut occur1 = dict1.values().collect::<Vec<_>>();
+        occur1.sort();
+        let mut occur2 = dict2.values().collect::<Vec<_>>();
+        occur2.sort();
+
         dict1.keys().collect::<HashSet<_>>() == dict2.keys().collect::<HashSet<_>>()
-            && dict1.values().collect::<HashSet<_>>() == dict2.values().collect::<HashSet<_>>()
+            && occur1 == occur2
     }
 }
 // @lc code=end
 
 struct Solution;
+
 #[cfg(test)]
 mod tests {
     use super::*;
