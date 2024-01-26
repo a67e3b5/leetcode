@@ -1657,7 +1657,7 @@ mod _1456_maximum_number_of_vowels_in_a_substring_of_given_length;
 // mod _1654_minimum_jumps_to_reach_home;
 // mod _1655_distribute_repeating_integers;
 // mod _1656_design_an_ordered_stream;
-// mod _1657_determine_if_two_strings_are_close;
+mod _1657_determine_if_two_strings_are_close;
 // mod _1658_minimum_operations_to_reduce_x_to_zero;
 // mod _1659_maximize_grid_happiness;
 // mod _1660_correct_a_binary_tree;
