@@ -5,25 +5,32 @@
  */
 
 // @lc code=start
-use std::collections::{HashMap, HashSet};
-
 impl Solution {
     pub fn close_strings(word1: String, word2: String) -> bool {
-        let mut dict1 = HashMap::<char, usize>::new();
-        let mut dict2 = HashMap::<char, usize>::new();
-        for c in word1.chars() {
-            dict1.entry(c).and_modify(|v| *v += 1).or_insert(1);
-        }
-        for c in word2.chars() {
-            dict2.entry(c).and_modify(|v| *v += 1).or_insert(1);
-        }
-        let mut occur1 = dict1.values().collect::<Vec<_>>();
-        occur1.sort();
-        let mut occur2 = dict2.values().collect::<Vec<_>>();
-        occur2.sort();
+        let mut dict1 = vec![0; 26];
+        let mut dict2 = vec![0; 26];
 
-        dict1.keys().collect::<HashSet<_>>() == dict2.keys().collect::<HashSet<_>>()
-            && occur1 == occur2
+        for b in word1.into_bytes() {
+            dict1[(b - b'a') as usize] += 1;
+        }
+        for b in word2.into_bytes() {
+            dict2[(b - b'a') as usize] += 1;
+        }
+
+        let is_same_chars = dict1
+            .iter()
+            .zip(dict2.iter())
+            .filter(|(&n1, &n2)| n1 * n2 == 0)
+            .all(|(n1, n2)| n1 + n2 == 0);
+        let is_same_occurs = {
+            dict1.retain(|n| *n != 0);
+            dict1.sort();
+            dict2.retain(|n| *n != 0);
+            dict2.sort();
+            dict1 == dict2
+        };
+
+        is_same_chars && is_same_occurs
     }
 }
 // @lc code=end
