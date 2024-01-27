@@ -9,6 +9,7 @@ use std::cmp::Ordering;
 
 impl Solution {
     pub fn asteroid_collision(mut asteroids: Vec<i32>) -> Vec<i32> {
+        let mut positives: Vec<i32> = vec![];
         let mut negatives: Vec<i32> = vec![];
         while let Some(a0) = asteroids.pop() {
             if a0.is_negative() {
@@ -16,7 +17,7 @@ impl Solution {
                 continue;
             }
             let Some(a1) = negatives.pop() else {
-                asteroids.push(a0);
+                positives.push(a0);
                 continue;
             };
             match (a0).cmp(&-a1) {
@@ -26,14 +27,12 @@ impl Solution {
                 Ordering::Equal => {}
                 Ordering::Greater => {
                     asteroids.push(a0);
-                    if negatives.is_empty() {
-                        return asteroids;
-                    }
                 }
             }
         }
-        negatives.reverse();
-        negatives
+        positives.append(&mut negatives);
+        positives.reverse();
+        positives
     }
 }
 // @lc code=end
