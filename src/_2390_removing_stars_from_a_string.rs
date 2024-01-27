@@ -7,23 +7,19 @@
 // @lc code=start
 impl Solution {
     pub fn remove_stars(s: String) -> String {
-        const STAR: u8 = b'*';
-        let mut bs = s.into_bytes();
-        let mut i = bs.len();
-        let mut stars = 0;
-        while 0 < i {
-            i -= 1;
-            let b = bs.get_mut(i).unwrap();
-            if *b == STAR {
-                stars += 1;
-            } else if 0 < stars {
-                *b = STAR;
-                stars -= 1;
+        let s = s.as_bytes();
+        let mut rez = vec![0; s.len()];
+        let mut i = 0;
+        for b in s {
+            match *b {
+                b'*' => i -= 1,
+                c => {
+                    rez[i] = c;
+                    i += 1;
+                }
             }
         }
-        bs.retain(|&b| b != STAR);
-
-        String::from_utf8(bs).unwrap()
+        rez.into_iter().take(i).map(|b| b as char).collect()
     }
 }
 // @lc code=end
