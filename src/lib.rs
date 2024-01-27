@@ -2095,7 +2095,7 @@ mod _1768_merge_strings_alternately;
 // mod _2092_find_all_people_with_secret;
 // mod _2093_minimum_cost_to_reach_city_with_discounts;
 // mod _2094_finding_3_digit_even_numbers;
-// mod _2095_delete_the_middle_node_of_a_linked_list;
+mod _2095_delete_the_middle_node_of_a_linked_list;
 // mod _2096_step_by_step_directions_from_a_binary_tree_node_to_another;
 // mod _2097_valid_arrangement_of_pairs;
 // mod _2098_subsequence_of_size_k_with_the_largest_even_sum;
