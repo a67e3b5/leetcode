@@ -735,7 +735,7 @@ mod _724_find_pivot_index;
 // mod _732_my_calendar_iii;
 // mod _733_flood_fill;
 // mod _734_sentence_similarity;
-// mod _735_asteroid_collision;
+mod _735_asteroid_collision;
 // mod _736_parse_lisp_expression;
 // mod _737_sentence_similarity_ii;
 // mod _738_monotone_increasing_digits;
