@@ -2390,7 +2390,7 @@ mod _2215_find_the_difference_of_two_arrays;
 // mod _2387_median_of_a_row_wise_sorted_matrix;
 // mod _2388_change_null_values_in_a_table_to_the_previous_value;
 // mod _2389_longest_subsequence_with_limited_sum;
-// mod _2390_removing_stars_from_a_string;
+mod _2390_removing_stars_from_a_string;
 // mod _2391_minimum_amount_of_time_to_collect_garbage;
 // mod _2392_build_a_matrix_with_conditions;
 // mod _2393_count_strictly_increasing_subarrays;
