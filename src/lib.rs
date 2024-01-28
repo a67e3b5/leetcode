@@ -328,7 +328,7 @@ mod _283_move_zeroes;
 // mod _325_maximum_size_subarray_sum_equals_k;
 // mod _326_power_of_three;
 // mod _327_count_of_range_sum;
-// mod _328_odd_even_linked_list;
+mod _328_odd_even_linked_list;
 // mod _329_longest_increasing_path_in_a_matrix;
 // mod _330_patching_array;
 // mod _331_verify_preorder_serialization_of_a_binary_tree;
