@@ -6,24 +6,25 @@
 
 // @lc code=start
 impl Solution {
-    pub fn delete_middle(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-        let mut rabbit = head.clone();
-        let mut turtle = head;
-        let mut arr = vec![];
-        while let Some(rab_1) = rabbit {
-            let Some(rab_2) = rab_1.next else {
-                break;
-            };
-            let tur = turtle.unwrap();
-            arr.push(tur.val);
-            turtle = tur.next;
-            rabbit = rab_2.next;
+    pub fn delete_middle(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut num_nodes: usize = 1;
+        let mut ptr = head.as_ref()?.as_ref();
+        while let Some(boxed_node) = ptr.next.as_ref() {
+            ptr = boxed_node.as_ref();
+            num_nodes += 1;
         }
-        let mut ans = turtle.map(|n| n.next).unwrap_or_default();
-        for val in arr.into_iter().rev() {
-            ans = Some(Box::new(ListNode { val, next: ans }))
+
+        if num_nodes == 1 {
+            return None;
         }
-        ans
+
+        let mut base: &mut ListNode = head.as_mut().unwrap().as_mut();
+        for _ in 0..(num_nodes >> 1) - 1 {
+            base = base.next.as_mut().unwrap().as_mut();
+        }
+
+        base.next = base.next.as_mut().unwrap().as_mut().next.take();
+        head
     }
 }
 // @lc code=end
