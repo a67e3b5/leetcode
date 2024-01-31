@@ -18,8 +18,8 @@ impl Solution {
         let num_paths_to_this = path
             .iter()
             .rev()
-            .scan(0, |sum, v| {
-                *sum += v;
+            .scan(0_i32, |sum, v| {
+                *sum = (*sum).saturating_add(*v);
                 Some(*sum == target_sum)
             })
             .filter(|&bool| bool)
