@@ -841,7 +841,7 @@ mod _746_min_cost_climbing_stairs;
 // mod _838_push_dominoes;
 // mod _839_similar_string_groups;
 // mod _840_magic_squares_in_grid;
-// mod _841_keys_and_rooms;
+mod _841_keys_and_rooms;
 // mod _842_split_array_into_fibonacci_sequence;
 // mod _843_guess_the_word;
 // mod _844_backspace_string_compare;
