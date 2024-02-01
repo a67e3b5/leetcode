@@ -7,32 +7,38 @@
 // @lc code=start
 impl Solution {
     pub fn min_reorder(n: i32, connections: Vec<Vec<i32>>) -> i32 {
-        let mut connections: Vec<Vec<usize>> = connections
-            .into_iter()
-            .map(|v| v.into_iter().map(|i| i as _).collect())
-            .collect();
         let mut ans = 0;
-        let mut has_access = vec![false; n as usize];
-        has_access[0] = true;
-
-        while !connections.is_empty() {
-            connections.retain(|v| {
-                let c0 = v[0];
-                let c1 = v[1];
-                if !has_access[c0] && has_access[c1] {
-                    has_access[c0] = true;
-                    false
-                } else if has_access[c0] && !has_access[c1] {
-                    ans += 1;
-                    has_access[c1] = true;
-                    false
-                } else {
-                    true
-                }
-            });
+        let mut graph: Vec<Vec<Edge>> = vec![vec![]; n as usize];
+        for c in connections {
+            graph[c[0] as usize].push(Edge::new(c[1] as usize, true));
+            graph[c[1] as usize].push(Edge::new(c[0] as usize, false));
         }
+        let mut nodes = vec![(n as usize, 0_usize)];
 
+        while let Some((origin, node)) = nodes.pop() {
+            for edge in &graph[node] {
+                if edge.dest != origin {
+                    if edge.is_reordered {
+                        ans += 1;
+                    }
+                    nodes.push((node, edge.dest));
+                }
+            }
+        }
         ans
+    }
+}
+
+#[derive(Debug, Clone)]
+struct Edge {
+    dest: usize,
+    is_reordered: bool,
+}
+
+impl Edge {
+    #[inline]
+    fn new(dest: usize, is_reordered: bool) -> Self {
+        Self { dest, is_reordered }
     }
 }
 // @lc code=end
