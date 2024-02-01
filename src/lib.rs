@@ -547,7 +547,7 @@ mod _437_path_sum_iii;
 // mod _544_output_contest_matches;
 // mod _545_boundary_of_binary_tree;
 // mod _546_remove_boxes;
-// mod _547_number_of_provinces;
+mod _547_number_of_provinces;
 // mod _548_split_array_with_equal_sum;
 // mod _549_binary_tree_longest_consecutive_sequence_ii;
 // mod _550_game_play_analysis_iv;
