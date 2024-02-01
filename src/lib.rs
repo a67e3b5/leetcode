@@ -1372,7 +1372,7 @@ mod _1207_unique_number_of_occurrences;
 // mod _1369_get_the_second_most_recent_activity;
 // mod _1370_increasing_decreasing_string;
 // mod _1371_find_the_longest_substring_containing_vowels_in_even_counts;
-// mod _1372_longest_zig_zag_path_in_a_binary_tree;
+mod _1372_longest_zig_zag_path_in_a_binary_tree;
 // mod _1373_maximum_sum_bst_in_binary_tree;
 // mod _1374_generate_a_string_with_characters_that_have_odd_counts;
 // mod _1375_number_of_times_binary_string_is_prefix_aligned;
