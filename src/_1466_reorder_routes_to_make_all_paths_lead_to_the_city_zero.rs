@@ -15,19 +15,23 @@ impl Solution {
         let mut has_access = vec![false; n as usize];
         has_access[0] = true;
 
-        while has_access.iter().any(|&bool| !bool) {
-            for c in &mut connections {
-                let (c0, c1) = (c[0], c[1]);
-                if !has_access[c1] && has_access[c0] {
-                    c[1] = c0;
-                    c[0] = c1;
+        while !connections.is_empty() {
+            connections.retain(|v| {
+                let c0 = v[0];
+                let c1 = v[1];
+                if !has_access[c0] && has_access[c1] {
+                    has_access[c0] = true;
+                    false
+                } else if has_access[c0] && !has_access[c1] {
                     ans += 1;
                     has_access[c1] = true;
-                } else if !has_access[c0] && has_access[c1] {
-                    has_access[c0] = true;
+                    false
+                } else {
+                    true
                 }
-            }
+            });
         }
+
         ans
     }
 }
