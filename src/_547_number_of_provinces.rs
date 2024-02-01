@@ -8,21 +8,34 @@
 impl Solution {
     pub fn find_circle_num(is_connected: Vec<Vec<i32>>) -> i32 {
         let num_cities = is_connected.len();
-        // We name every province by its representative city, which is initialized to a non-existent city.
-        let mut provinces = vec![num_cities; num_cities];
-
-        while let Some(repr) = provinces.iter().position(|&p| p == num_cities) {
-            for (j, _) in is_connected[repr]
+        let mut is_classed = vec![false; num_cities];
+        let mut num_provinces = 0;
+        let adjacent = |city: usize| {
+            is_connected[city]
                 .iter()
                 .enumerate()
                 .filter(|(_, &b)| b == 1)
-            {
-                provinces[j] = repr
+                .map(|(i, _)| i)
+                .collect::<Vec<_>>()
+        };
+
+        for city in 0..num_cities {
+            if is_classed[city] {
+                continue;
+            }
+            num_provinces += 1;
+            is_classed[city] = true;
+            let mut hubs = adjacent(city);
+
+            while let Some(hub) = hubs.pop() {
+                is_classed[hub] = true;
+                let mut next = adjacent(hub);
+                next.retain(|&h| !is_classed[h]);
+                hubs.append(&mut next);
             }
         }
-        provinces.sort();
-        provinces.dedup();
-        provinces.len() as i32
+
+        num_provinces
     }
 }
 // @lc code=end
