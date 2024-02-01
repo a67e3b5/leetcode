@@ -16,7 +16,6 @@ impl Solution {
                 .enumerate()
                 .filter(|(_, &b)| b == 1)
                 .map(|(i, _)| i)
-                .collect::<Vec<_>>()
         };
 
         for city in 0..num_cities {
@@ -25,13 +24,13 @@ impl Solution {
             }
             num_provinces += 1;
             is_classed[city] = true;
-            let mut hubs = adjacent(city);
+            let mut hubs = adjacent(city)
+                .filter(|&h| !is_classed[h])
+                .collect::<Vec<_>>();
 
             while let Some(hub) = hubs.pop() {
                 is_classed[hub] = true;
-                let mut next = adjacent(hub);
-                next.retain(|&h| !is_classed[h]);
-                hubs.append(&mut next);
+                hubs.extend(adjacent(hub).filter(|&h| !is_classed[h]));
             }
         }
 
