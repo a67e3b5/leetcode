@@ -1466,7 +1466,7 @@ mod _1456_maximum_number_of_vowels_in_a_substring_of_given_length;
 // mod _1463_cherry_pickup_ii;
 // mod _1464_maximum_product_of_two_elements_in_an_array;
 // mod _1465_maximum_area_of_a_piece_of_cake_after_horizontal_and_vertical_cuts;
-// mod _1466_reorder_routes_to_make_all_paths_lead_to_the_city_zero;
+mod _1466_reorder_routes_to_make_all_paths_lead_to_the_city_zero;
 // mod _1467_probability_of_a_two_boxes_having_the_same_number_of_distinct_balls;
 // mod _1468_calculate_salaries;
 // mod _1469_find_all_the_lonely_nodes;
