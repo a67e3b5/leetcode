@@ -1926,7 +1926,7 @@ mod _1768_merge_strings_alternately;
 // mod _1923_longest_common_subpath;
 // mod _1924_erect_the_fence_ii;
 // mod _1925_count_square_sum_triples;
-// mod _1926_nearest_exit_from_entrance_in_maze;
+mod _1926_nearest_exit_from_entrance_in_maze;
 // mod _1927_sum_game;
 // mod _1928_minimum_cost_to_reach_destination_in_time;
 // mod _1929_concatenation_of_array;
