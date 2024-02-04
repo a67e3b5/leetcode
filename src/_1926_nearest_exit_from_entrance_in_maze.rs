@@ -42,6 +42,9 @@ impl Solution {
                 if on_edge((i, j)) {
                     return steps;
                 }
+                if is_wall(maze[i][j]) {
+                    continue;
+                }
                 if !is_wall(maze[i - 1][j]) {
                     next.push((i - 1, j))
                 }
