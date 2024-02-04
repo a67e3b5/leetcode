@@ -5,73 +5,44 @@
  */
 
 // @lc code=start
+use std::collections::HashSet;
+use std::collections::VecDeque;
 impl Solution {
-    pub fn nearest_exit(mut maze: Vec<Vec<char>>, entrance: Vec<i32>) -> i32 {
-        const WALL: char = '+';
-        const FRONT: char = '?';
-        let entrance = (entrance[0] as usize, entrance[1] as usize);
+    pub fn nearest_exit(maze: Vec<Vec<char>>, entrance: Vec<i32>) -> i32 {
         let m_rows = maze.len();
         let n_cols = maze[0].len();
-        let is_wall = |c: char| c == WALL;
-        let is_front = |c: char| c == FRONT;
-        let is_exit =
-            |p: (usize, usize)| p.0 == 0 || p.0 == m_rows - 1 || p.1 == 0 || p.1 == n_cols - 1;
-        let mut steps = 0;
+        let is_empty = |c: char| c == '.';
+        let mut front = VecDeque::new();
+        let mut visited = HashSet::new();
 
-        maze[entrance.0][entrance.1] = FRONT;
-
-        if is_exit(entrance) {
-            let (row, col) = entrance;
-            if row != 0 && !is_wall(maze[row - 1][col]) {
-                maze[row - 1][col] = FRONT;
-            }
-            if row != m_rows - 1 && !is_wall(maze[row + 1][col]) {
-                maze[row + 1][col] = FRONT;
-            }
-            if col != 0 && !is_wall(maze[row][col - 1]) {
-                maze[row][col - 1] = FRONT;
-            }
-            if col != n_cols - 1 && !is_wall(maze[row][col + 1]) {
-                maze[row][col + 1] = FRONT;
-            }
-            maze[row][col] = WALL;
-            steps += 1;
-        }
-
-        loop {
-            let mut next = vec![];
-            for row in 0..m_rows {
-                for col in 0..n_cols {
-                    if !is_front(maze[row][col]) {
-                        continue;
+        front.push_back((entrance[0] as usize, entrance[1] as usize, 0));
+        while !front.is_empty() {
+            while let Some((i, j, steps)) = front.pop_front() {
+                if !visited.insert((i, j)) {
+                    continue;
+                }
+                if (i == 0 || i == m_rows - 1 || j == 0 || j == n_cols - 1)
+                    && (i != entrance[0] as usize || j != entrance[1] as usize)
+                {
+                    return steps;
+                }
+                if is_empty(maze[i][j]) {
+                    if i > 0 && is_empty(maze[i - 1][j]) {
+                        front.push_back((i - 1, j, steps + 1));
                     }
-                    if is_exit((row, col)) {
-                        return steps;
+                    if i < m_rows - 1 && is_empty(maze[i + 1][j]) {
+                        front.push_back((i + 1, j, steps + 1));
                     }
-                    if !is_wall(maze[row - 1][col]) {
-                        next.push((row - 1, col))
+                    if j > 0 && is_empty(maze[i][j - 1]) {
+                        front.push_back((i, j - 1, steps + 1));
                     }
-                    if !is_wall(maze[row + 1][col]) {
-                        next.push((row + 1, col))
+                    if j < n_cols - 1 && is_empty(maze[i][j + 1]) {
+                        front.push_back((i, j + 1, steps + 1));
                     }
-                    if !is_wall(maze[row][col - 1]) {
-                        next.push((row, col - 1))
-                    }
-                    if !is_wall(maze[row][col + 1]) {
-                        next.push((row, col + 1))
-                    }
-                    // Bury with a wall the current location so as not to be revisited.
-                    maze[row][col] = WALL;
                 }
             }
-            if next.is_empty() {
-                return -1;
-            }
-            for (row, col) in next {
-                maze[row][col] = FRONT;
-            }
-            steps += 1;
         }
+        -1
     }
 }
 // @lc code=end
