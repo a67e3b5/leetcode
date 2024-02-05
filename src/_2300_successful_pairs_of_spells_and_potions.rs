@@ -9,12 +9,23 @@ impl Solution {
     pub fn successful_pairs(spells: Vec<i32>, mut potions: Vec<i32>, success: i64) -> Vec<i32> {
         let m = potions.len();
         potions.sort();
+        let mut potions = potions.into_iter().enumerate().collect::<Vec<_>>();
+        potions.dedup_by_key(|(_, p)| *p);
+        let m_dedup = potions.len();
         let mut ans = vec![];
         for spell in spells {
-            let min_idx = potions
-                .iter()
-                .position(|&potion| success <= spell as i64 * potion as i64)
-                .unwrap_or(m);
+            let min_idx = match potions
+                .binary_search_by_key(&success, |&(_, potion)| spell as i64 * potion as i64)
+            {
+                Ok(i) => potions[i].0,
+                Err(i) => {
+                    if i < m_dedup {
+                        potions[i].0
+                    } else {
+                        m
+                    }
+                }
+            };
             ans.push(m as i32 - min_idx as i32)
         }
         ans
