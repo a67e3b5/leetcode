@@ -2336,7 +2336,7 @@ mod _2215_find_the_difference_of_two_arrays;
 // mod _2333_minimum_sum_of_squared_difference;
 // mod _2334_subarray_with_elements_greater_than_varying_threshold;
 // mod _2335_minimum_amount_of_time_to_fill_cups;
-// mod _2336_smallest_number_in_infinite_set;
+mod _2336_smallest_number_in_infinite_set;
 // mod _2337_move_pieces_to_obtain_a_string;
 // mod _2338_count_the_number_of_ideal_arrays;
 // mod _2339_all_the_matches_of_the_league;
