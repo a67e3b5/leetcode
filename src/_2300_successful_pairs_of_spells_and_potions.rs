@@ -5,27 +5,21 @@
  */
 
 // @lc code=start
+use std::cmp::Ordering;
 impl Solution {
     pub fn successful_pairs(spells: Vec<i32>, mut potions: Vec<i32>, success: i64) -> Vec<i32> {
         let m = potions.len();
-        potions.sort();
-        let mut potions = potions.into_iter().enumerate().collect::<Vec<_>>();
-        potions.dedup_by_key(|(_, p)| *p);
-        let m_dedup = potions.len();
+        potions.sort_unstable();
         let mut ans = vec![];
         for spell in spells {
-            let min_idx = match potions
-                .binary_search_by_key(&success, |&(_, potion)| spell as i64 * potion as i64)
-            {
-                Ok(i) => potions[i].0,
-                Err(i) => {
-                    if i < m_dedup {
-                        potions[i].0
-                    } else {
-                        m
-                    }
-                }
-            };
+            let min_idx = potions
+                .binary_search_by(
+                    |&potion| match (spell as i64 * potion as i64).cmp(&success) {
+                        Ordering::Equal => Ordering::Greater,
+                        ord => ord,
+                    },
+                )
+                .unwrap_err();
             ans.push(m as i32 - min_idx as i32)
         }
         ans
