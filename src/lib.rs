@@ -2300,7 +2300,7 @@ mod _2215_find_the_difference_of_two_arrays;
 // mod _2297_jump_game_viii;
 // mod _2298_tasks_count_in_the_weekend;
 // mod _2299_strong_password_checker_ii;
-// mod _2300_successful_pairs_of_spells_and_potions;
+mod _2300_successful_pairs_of_spells_and_potions;
 // mod _2301_match_substring_after_replacement;
 // mod _2302_count_subarrays_with_score_less_than_k;
 // mod _2303_calculate_amount_paid_in_taxes;
