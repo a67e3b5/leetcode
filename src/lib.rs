@@ -215,7 +215,7 @@ mod _206_reverse_linked_list;
 // mod _212_word_search_ii;
 // mod _213_house_robber_ii;
 // mod _214_shortest_palindrome;
-// mod _215_kth_largest_element_in_an_array;
+mod _215_kth_largest_element_in_an_array;
 // mod _216_combination_sum_iii;
 // mod _217_contains_duplicate;
 // mod _218_the_skyline_problem;
