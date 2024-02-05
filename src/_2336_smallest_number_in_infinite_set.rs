@@ -34,7 +34,7 @@ impl SmallestInfiniteSet {
     }
 
     fn add_back(&mut self, num: i32) {
-        if num <= self.cur {
+        if num <= self.cur && !self.back.iter().any(|&Reverse(n)| n == num) {
             self.back.push(Reverse(num))
         }
     }
