@@ -62,7 +62,7 @@ mod _17_letter_combinations_of_a_phone_number;
 // mod _59_spiral_matrix_ii;
 // mod _60_permutation_sequence;
 // mod _61_rotate_list;
-// mod _62_unique_paths;
+mod _62_unique_paths;
 // mod _63_unique_paths_ii;
 // mod _64_minimum_path_sum;
 // mod _65_valid_number;
