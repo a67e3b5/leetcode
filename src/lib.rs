@@ -198,7 +198,7 @@ mod _151_reverse_words_in_a_string;
 // mod _195_tenth_line;
 // mod _196_delete_duplicate_emails;
 // mod _197_rising_temperature;
-// mod _198_house_robber;
+mod _198_house_robber;
 mod _199_binary_tree_right_side_view;
 // mod _200_number_of_islands;
 // mod _201_bitwise_and_of_numbers_range;
