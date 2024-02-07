@@ -208,7 +208,7 @@ mod _199_binary_tree_right_side_view;
 // mod _205_isomorphic_strings;
 mod _206_reverse_linked_list;
 // mod _207_course_schedule;
-// mod _208_implement_trie_prefix_tree;
+mod _208_implement_trie_prefix_tree;
 // mod _209_minimum_size_subarray_sum;
 // mod _210_course_schedule_ii;
 // mod _211_design_add_and_search_words_data_structure;
