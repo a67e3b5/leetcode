@@ -18,21 +18,18 @@ impl Solution {
             }
         }
         let mut count_grid = vec![vec![0; n]; m];
-        if let Some(i) = (0..m).find(|&i| match_grid[i][0]) {
-            (i..m).for_each(|i| count_grid[i][0] = 1);
-        }
-        if let Some(j) = (0..n).find(|&j| match_grid[0][j]) {
-            (j..n).for_each(|j| count_grid[0][j] = 1);
-        }
-        for i in 1..m {
-            for j in 1..n {
-                let inc = if match_grid[i][j] { 1 } else { 0 };
-                count_grid[i][j] = inc
-                    + if match_grid[i - 1][j - 1] {
-                        count_grid[i - 1][j - 1]
-                    } else {
-                        count_grid[i - 1][j].max(count_grid[i][j - 1])
-                    };
+        for i in 0..m {
+            for j in 0..n {
+                let inc = if match_grid[i][j] {
+                    (i..m).for_each(|i| match_grid[i][j] = false);
+                    (j..n).for_each(|j| match_grid[i][j] = false);
+                    1
+                } else {
+                    0
+                };
+                let u = if i == 0 { 0 } else { count_grid[i - 1][j] };
+                let l = if j == 0 { 0 } else { count_grid[i][j - 1] };
+                count_grid[i][j] = inc + u.max(l);
             }
         }
         count_grid[m - 1][n - 1]
@@ -56,6 +53,7 @@ mod tests {
                 LCSS.len(),
             ),
             (("bsbininm", "jmjkbkjkv"), 1),
+            (("pmjghexybyrgzczy", "hafcdqbgncrcbihkd"), 4),
         ];
         for (input, output) in samples {
             assert_eq!(
