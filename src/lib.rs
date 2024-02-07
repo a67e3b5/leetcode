@@ -1143,7 +1143,7 @@ mod _1137_n_th_tribonacci_number;
 // mod _1140_stone_game_ii;
 // mod _1141_user_activity_for_the_past_30_days_i;
 // mod _1142_user_activity_for_the_past_30_days_ii;
-// mod _1143_longest_common_subsequence;
+mod _1143_longest_common_subsequence;
 // mod _1144_decrease_elements_to_make_array_zigzag;
 // mod _1145_binary_tree_coloring_game;
 // mod _1146_snapshot_array;
