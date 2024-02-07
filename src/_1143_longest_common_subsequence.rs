@@ -17,22 +17,29 @@ impl Solution {
                 }
             }
         }
-        let mut count_grid = vec![vec![0; n]; m];
+        let mut sequence_grid = vec![vec![vec![]; n]; m];
         for i in 0..m {
             for j in 0..n {
-                let inc = if match_grid[i][j] {
-                    (i..m).for_each(|i| match_grid[i][j] = false);
-                    (j..n).for_each(|j| match_grid[i][j] = false);
-                    1
+                let mut u = if i == 0 {
+                    vec![]
                 } else {
-                    0
+                    sequence_grid[i - 1][j].clone()
                 };
-                let u = if i == 0 { 0 } else { count_grid[i - 1][j] };
-                let l = if j == 0 { 0 } else { count_grid[i][j - 1] };
-                count_grid[i][j] = inc + u.max(l);
+                if match_grid[i][j] && !u.iter().any(|p: &(usize, usize)| p.0 == i || p.1 == j) {
+                    u.push((i, j));
+                }
+                let mut l = if j == 0 {
+                    vec![]
+                } else {
+                    sequence_grid[i][j - 1].clone()
+                };
+                if match_grid[i][j] && !l.iter().any(|p: &(usize, usize)| p.0 == i || p.1 == j) {
+                    l.push((i, j));
+                }
+                sequence_grid[i][j] = std::cmp::max_by_key(u, l, |v| v.len());
             }
         }
-        count_grid[m - 1][n - 1]
+        sequence_grid[m - 1][n - 1].len() as i32
     }
 }
 // @lc code=end
@@ -48,12 +55,12 @@ mod tests {
         const LCSS: &str = "longestcommonsubsequence";
         const XXXX: &str = "xxxxxxxxxxxxxxxxxxxxxxxx";
         let samples = [
-            (
-                (&*format!("x{}{}", XXXX, LCSS), &*format!("{}x", LCSS)),
-                LCSS.len(),
-            ),
+            ((&*format!("x{}{}", XXXX, LCSS), &*format!("{}x", LCSS)), LCSS.len()),
             (("bsbininm", "jmjkbkjkv"), 1),
             (("pmjghexybyrgzczy", "hafcdqbgncrcbihkd"), 4),
+            (("fcvafurqjylclorwfoladwfqzkbebslwnmpmlkbezkxoncvwhstwzwpqxqtyxozkpgtgtsjobujezgrkvevklmludgtyrmjaxyputqbyxqvupojutsjwlwluzsbmvyxifqtglwvcnkfsfglwjwrmtyxmdgjifyjwrsnenuvsdedsbqdovwzsdghclcdexmtsbexwrszihcpibwpidixmpmxshwzmjgtadmtkxqfkrsdqjcrmxkbkfoncrcvoxuvcdytajgfwrcxivixanuzerebuzklyhezevonqdsrkzetsrgfgxibqpmfuxcrinetyzkvudghgrytsvwzkjulmhanankxqfihenuhmfsfkfepibkjmzybmlkzozmluvybyzsleludsxkpinizoraxonmhwtkfkhudizepyzijafqlepcbihofepmjqtgrsxorunshgpazovuhktatmlcfklafivivefyfubunszyvarcrkpsnglkduzaxqrerkvcnmrurkhkpargvcxefovwtapedaluhclmzynebczodwropwdenqxmrutuhehadyfspcpuxyzodifqdqzgbwhodcjonypyjwbwxepcpujerkrelunstebopkncdazexsbezmhynizsvarafwfmnclerafejgnizcbsrcvcnwrolofyzulcxaxqjqzunedidulspslebifinqrchyvapkzmzwbwjgbyrqhqpolwjijmzyduzerqnadapudmrazmzadstozytonuzarizszubkzkhenaxivytmjqjgvgzwpgxefatetoncjgjsdilmvgtgpgbibexwnexstipkjylalqnupexytkradwxmlmhsnmzuxcdkfkxyfgrmfqtajatgjctenqhkvyrgvapctqtyrufcdobibizihuhsrsterozotytubefutaxcjarknynetipehoduxyjstufwvkvwvwnuletybmrczgtmxctuny"
+            , "nohgdazargvalupetizezqpklktojqtqdivcpsfgjopaxwbkvujilqbclehulatshehmjqhyfkpcfwxovajkvankjkvevgdovazmbgtqfwvejczsnmbchkdibstklkxarwjqbqxwvixavkhylqvghqpifijohudenozotejoxavkfkzcdqnoxydynavwdylwhatslyrwlejwdwrmpevmtwpahatwlaxmjmdgrebmfyngdcbmbgjcvqpcbadujkxaxujudmbejcrevuvcdobolcbstifedcvmngnqhudixgzktcdqngxmruhcxqxypwhahobudelivgvynefkjqdyvalmvudcdivmhghqrelurodwdsvuzmjixgdexonwjczghalsjopixsrwjixuzmjgxydqnipelgrivkzkxgjchibgnqbknstspujwdydszohqjsfuzstyjgnwhsrebmlwzkzijgnmnczmrehspihspyfedabotwvwxwpspypctizyhcxypqzctwlspszonsrmnyvmhsvqtkbyhmhwjmvazaviruzqxmbczaxmtqjexmdudypovkjklynktahupanujylylgrajozobsbwpwtohkfsxeverqxylwdwtojoxydepybavwhgdehafurqtcxqhuhkdwxkdojipolctcvcrsvczcxedglgrejerqdgrsvsxgjodajatsnixutihwpivihadqdotsvyrkxehodybapwlsjexixgponcxifijchejoxgxebmbclczqvkfuzgxsbshqvgfcraxytaxeviryhexmvqjybizivyjanwxmpojgxgbyhcruvqpafwjslkbohqlknkdqjixsfsdurgbsvclmrcrcnulinqvcdqhcvwdaxgvafwravunurqvizqtozuxinytafopmhchmxsxgfanetmdcjalmrolejidylkjktunqhkxchyjmpkvsfgnybsjedmzkrkhwryzan"
+            ), 323),
         ];
         for (input, output) in samples {
             assert_eq!(
