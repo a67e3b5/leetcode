@@ -5,12 +5,10 @@
  */
 
 // @lc code=start
-use std::cell::RefCell;
-use std::rc::Rc;
 #[derive(Default)]
 struct Trie {
     can_end: bool,
-    next: [Option<Rc<RefCell<Trie>>>; 26],
+    next: [Option<Box<Trie>>; 26],
 }
 
 /**
@@ -23,36 +21,29 @@ impl Trie {
     }
 
     fn insert(&mut self, mut word: String) {
-        let (base, depth) = self.point(&*word);
-        if word.is_empty()
-            || (depth == word.len() && base.is_some() && base.as_ref().unwrap().borrow().can_end)
-        {
+        let (base, base_depth) = self.point_mut(&*word);
+        let is_prefix_of_already_inserted = base_depth == word.len();
+        if word.is_empty() || (is_prefix_of_already_inserted && base.can_end) {
             return;
         }
-        if depth == word.len() {
-            return base.as_ref().unwrap().borrow_mut().can_end = true;
+        if is_prefix_of_already_inserted {
+            return base.can_end = true;
         }
         let mut branch = Trie::new();
         branch.can_end = true;
-        for _ in depth..word.len() - 1 {
+        for _ in base_depth..word.len() - 1 {
             let c = word.pop().unwrap();
             let mut prev = Trie::new();
-            prev.next[(c as u8 - b'a') as usize] = Some(Rc::new(RefCell::new(branch)));
+            prev.next[(c as u8 - b'a') as usize] = Some(Box::new(branch));
             branch = prev;
         }
         let c = word.pop().unwrap();
-        if let Some(node) = base {
-            node.borrow_mut().next[(c as u8 - b'a') as usize] = Some(Rc::new(RefCell::new(branch)));
-        } else {
-            self.next[(c as u8 - b'a') as usize] = Some(Rc::new(RefCell::new(branch)));
-        }
+        base.next[(c as u8 - b'a') as usize] = Some(Box::new(branch));
     }
 
     fn search(&self, word: impl AsRef<str>) -> bool {
-        let (Some(node), depth) = self.point(&word) else {
-            return false;
-        };
-        node.borrow().can_end && depth == word.as_ref().len()
+        let (node, depth) = self.point(&word);
+        depth == word.as_ref().len() && node.can_end
     }
 
     fn starts_with(&self, prefix: impl AsRef<str>) -> bool {
@@ -60,30 +51,30 @@ impl Trie {
         depth == prefix.as_ref().len()
     }
 
-    fn point(&self, prefix: impl AsRef<str>) -> (Option<Rc<RefCell<Trie>>>, usize) {
-        let mut chars = prefix.as_ref().chars();
-        let Some(c0) = chars.next() else {
-            return (None, 0);
-        };
-        let Some(node) = self.next[(c0 as u8 - b'a') as usize].as_ref() else {
-            return (None, 0);
-        };
-        Self::_point(node, 1, &mut chars)
+    fn point(&self, prefix: impl AsRef<str>) -> (&Trie, usize) {
+        let mut node = self;
+        let mut depth = 0;
+        for c in prefix.as_ref().chars() {
+            let Some(ref next) = node.next[(c as u8 - b'a') as usize] else {
+                break;
+            };
+            node = next.as_ref();
+            depth += 1;
+        }
+        (node, depth)
     }
 
-    fn _point(
-        node: &Rc<RefCell<Trie>>,
-        depth: usize,
-        chars: &mut impl Iterator<Item = char>,
-    ) -> (Option<Rc<RefCell<Trie>>>, usize) {
-        let Some(c) = chars.next() else {
-            return (Some(node.clone()), depth);
-        };
-        let binding = node.borrow();
-        let Some(node) = binding.next[(c as u8 - b'a') as usize].as_ref() else {
-            return (Some(node.clone()), depth);
-        };
-        Self::_point(node, depth + 1, chars)
+    fn point_mut(&mut self, prefix: impl AsRef<str>) -> (&mut Trie, usize) {
+        let mut node = self;
+        let mut depth = 0;
+        for c in prefix.as_ref().chars() {
+            let Some(ref mut next) = node.next[(c as u8 - b'a') as usize] else {
+                break;
+            };
+            node = next.as_mut();
+            depth += 1;
+        }
+        (node, depth)
     }
 }
 
