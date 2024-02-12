@@ -11,7 +11,7 @@ impl Solution {
             .into_iter()
             .map(|v| (v[0], v[1]))
             .collect::<Vec<_>>();
-        intervals.sort_by_key(|(l, _)| *l);
+        intervals.sort_unstable();
         let mut ans = 0;
         let mut last = i32::MIN;
         for (l, r) in intervals {
