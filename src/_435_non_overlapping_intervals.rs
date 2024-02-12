@@ -6,16 +6,20 @@
 
 // @lc code=start
 impl Solution {
-    pub fn erase_overlap_intervals(mut intervals: Vec<Vec<i32>>) -> i32 {
-        intervals.sort_by_key(|v| v[0]);
+    pub fn erase_overlap_intervals(intervals: Vec<Vec<i32>>) -> i32 {
+        let mut intervals = intervals
+            .into_iter()
+            .map(|v| (v[0], v[1]))
+            .collect::<Vec<_>>();
+        intervals.sort_by_key(|(l, _)| *l);
         let mut ans = 0;
         let mut last = i32::MIN;
-        for v in intervals {
-            if v[0] < last {
-                last = v[1].min(last);
+        for (l, r) in intervals {
+            if l < last {
+                last = r.min(last);
                 ans += 1;
             } else {
-                last = v[1];
+                last = r;
             }
         }
         ans
