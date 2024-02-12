@@ -435,7 +435,7 @@ mod _392_is_subsequence;
 // mod _432_all_o_one_data_structure;
 // mod _433_minimum_genetic_mutation;
 // mod _434_number_of_segments_in_a_string;
-// mod _435_non_overlapping_intervals;
+mod _435_non_overlapping_intervals;
 // mod _436_find_right_interval;
 mod _437_path_sum_iii;
 // mod _438_find_all_anagrams_in_a_string;
