@@ -739,7 +739,7 @@ mod _735_asteroid_collision;
 // mod _736_parse_lisp_expression;
 // mod _737_sentence_similarity_ii;
 // mod _738_monotone_increasing_digits;
-// mod _739_daily_temperatures;
+mod _739_daily_temperatures;
 // mod _740_delete_and_earn;
 // mod _741_cherry_pickup;
 // mod _742_closest_leaf_in_a_binary_tree;
