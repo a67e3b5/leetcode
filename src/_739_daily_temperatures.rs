@@ -7,21 +7,19 @@
 // @lc code=start
 impl Solution {
     pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
-        let mut next_occurrence = [usize::MAX; 72]; // the last index indicates an imaginal temperature 101
-        for (i, t) in temperatures.iter().enumerate().rev() {
-            next_occurrence[*t as usize - 30] = i;
-        }
-        let mut ans = vec![0_i32; temperatures.len()];
-        for (i, t) in temperatures.iter().enumerate() {
-            next_occurrence[*t as usize - 30] = temperatures
-                .iter()
-                .skip(i + 1)
-                .position(|u| u == t)
-                .map_or(usize::MAX, |j| j + i + 1); // update an occurrence
-            let next_warmer_idx = *next_occurrence.iter().skip(*t as usize - 29).min().unwrap();
-            if next_warmer_idx < usize::MAX {
-                ans[i] = (next_warmer_idx - i) as i32;
+        let n = temperatures.len();
+        let mut ans = vec![0; n];
+        let mut stack = Vec::new();
+        for i in (0..n).rev() {
+            while !stack.is_empty() && temperatures[i] >= temperatures[*stack.last().unwrap()] {
+                stack.pop();
             }
+            ans[i] = if !stack.is_empty() {
+                *stack.last().unwrap() as i32 - i as i32
+            } else {
+                0
+            };
+            stack.push(i);
         }
         ans
     }
