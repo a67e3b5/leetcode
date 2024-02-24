@@ -8,8 +8,8 @@
 impl Solution {
     pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
         let mut ans = vec![0_i32; temperatures.len()];
-        let mut stack: Vec<(usize, &i32)> = vec![];
-        for (i, t) in temperatures.iter().enumerate().rev() {
+        let mut stack: Vec<(usize, i32)> = vec![];
+        for (i, t) in temperatures.into_iter().enumerate().rev() {
             while !stack.is_empty() && stack.last().unwrap().1 <= t {
                 stack.pop();
             }
