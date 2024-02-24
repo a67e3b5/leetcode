@@ -7,19 +7,18 @@
 // @lc code=start
 impl Solution {
     pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
-        let n = temperatures.len();
-        let mut ans = vec![0; n];
-        let mut stack = Vec::new();
-        for i in (0..n).rev() {
-            while !stack.is_empty() && temperatures[i] >= temperatures[*stack.last().unwrap()] {
-                stack.pop();
+        let mut ans = vec![0_i32; temperatures.len()];
+        let mut stack = vec![];
+        for (i, t) in temperatures.iter().enumerate().rev() {
+            while let Some((j, u)) = stack.pop() {
+                if u <= t {
+                    continue;
+                }
+                ans[i] = (j - i) as i32;
+                stack.push((j, u));
+                break;
             }
-            ans[i] = if !stack.is_empty() {
-                *stack.last().unwrap() as i32 - i as i32
-            } else {
-                0
-            };
-            stack.push(i);
+            stack.push((i, t));
         }
         ans
     }
