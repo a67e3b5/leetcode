@@ -2542,7 +2542,7 @@ mod _2390_removing_stars_from_a_string;
 // mod _2539_count_the_number_of_good_subsequences;
 // mod _2540_minimum_common_value;
 // mod _2541_minimum_operations_to_make_array_equal_ii;
-// mod _2542_maximum_subsequence_score;
+mod _2542_maximum_subsequence_score;
 // mod _2543_check_if_point_is_reachable;
 // mod _2544_alternating_digit_sum;
 // mod _2545_sort_the_students_by_their_kth_score;
