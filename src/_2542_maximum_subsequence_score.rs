@@ -9,25 +9,15 @@ use std::collections::BinaryHeap;
 impl Solution {
     pub fn max_score(nums1: Vec<i32>, nums2: Vec<i32>, k: i32) -> i64 {
         let k = k as usize;
-        let mut zip = nums1.into_iter().zip(nums2).collect::<Vec<_>>();
-        zip.sort_unstable_by_key(|(_, n2)| *n2);
-        let heap1 = zip
-            .iter()
-            .enumerate()
-            .map(|(i, p)| (p.0, i))
-            .collect::<BinaryHeap<_>>();
+        let mut zip = nums2.into_iter().zip(nums1).collect::<BinaryHeap<_>>();
         let mut ans = 0;
-        for (i, (n1, n2)) in zip.iter().enumerate().take(zip.len() - k + 1) {
-            let (mut sum, mut count) = (*n1 as i64, 1);
-            let mut heap1 = heap1.clone();
-            while count < k {
-                let (m1, j) = heap1.pop().unwrap();
-                if i < j {
-                    sum += m1 as i64;
-                    count += 1;
-                }
-            }
-            ans = ans.max(sum * *n2 as i64)
+        let mut heap = BinaryHeap::new();
+        (0..k - 1).for_each(|_| heap.push(zip.pop().unwrap().1));
+        while let Some((n2, n1)) = zip.pop() {
+            let mut h1 = heap.clone();
+            let sum = (0..k - 1).fold(n1 as i64, |acc, _| acc + h1.pop().unwrap() as i64);
+            heap.push(n1);
+            ans = ans.max(sum * n2 as i64)
         }
         ans
     }
