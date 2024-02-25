@@ -5,19 +5,31 @@
  */
 
 // @lc code=start
-use std::collections::BinaryHeap;
+use std::{
+    cmp::{Ordering, Reverse},
+    collections::BinaryHeap,
+};
 impl Solution {
     pub fn max_score(nums1: Vec<i32>, nums2: Vec<i32>, k: i32) -> i64 {
         let k = k as usize;
-        let mut zip = nums2.into_iter().zip(nums1).collect::<BinaryHeap<_>>();
+        let mut zip = nums2
+            .into_iter()
+            .map(|n| n as i64)
+            .zip(nums1.into_iter().map(|n| n as i64))
+            .collect::<Vec<_>>();
+        zip.sort_unstable();
         let mut ans = 0;
+        let mut sum = 0;
         let mut heap = BinaryHeap::new();
-        (0..k - 1).for_each(|_| heap.push(zip.pop().unwrap().1));
         while let Some((n2, n1)) = zip.pop() {
-            let mut h1 = heap.clone();
-            let sum = (0..k - 1).fold(n1 as i64, |acc, _| acc + h1.pop().unwrap() as i64);
-            heap.push(n1);
-            ans = ans.max(sum * n2 as i64)
+            sum += n1;
+            heap.push(Reverse(n1));
+            match heap.len().cmp(&k) {
+                Ordering::Less => continue,
+                Ordering::Equal => (),
+                Ordering::Greater => sum -= heap.pop().unwrap().0,
+            }
+            ans = ans.max(sum * n2)
         }
         ans
     }
