@@ -162,7 +162,7 @@ mod _151_reverse_words_in_a_string;
 // mod _159_longest_substring_with_at_most_two_distinct_characters;
 // mod _160_intersection_of_two_linked_lists;
 // mod _161_one_edit_distance;
-// mod _162_find_peak_element;
+mod _162_find_peak_element;
 // mod _163_missing_ranges;
 // mod _164_maximum_gap;
 // mod _165_compare_version_numbers;
