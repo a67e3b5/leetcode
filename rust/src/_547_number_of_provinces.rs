@@ -14,7 +14,7 @@ impl Solution {
             is_connected[city]
                 .iter()
                 .enumerate()
-                .filter(|(_, &b)| b == 1)
+                .filter(|&(_, &b)| b == 1)
                 .map(|(i, _)| i)
         };
 

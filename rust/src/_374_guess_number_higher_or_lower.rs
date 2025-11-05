@@ -11,7 +11,7 @@ impl Solution {
         let mut num = 1;
         let mut shift = n - 1;
         loop {
-            match guess(num) {
+            match unsafe { guess(num) } {
                 0 => return num,
                 1 => num += shift,
                 -1 => num -= shift,

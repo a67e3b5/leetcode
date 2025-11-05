@@ -1,3 +1,5 @@
-/target
-/Cargo.lock
 /_*
+
+# rust
+target/
+Cargo.lock

@@ -22,7 +22,7 @@ impl Solution {
             .iter()
             .zip(dict2.iter())
             .skip(OFFSET)
-            .filter(|(&n1, &n2)| n1 * n2 == 0)
+            .filter(|&(&n1, &n2)| n1 * n2 == 0)
             .all(|(n1, n2)| n1 + n2 == 0);
         let is_same_occurs = {
             let mut occurs1 = dict1
