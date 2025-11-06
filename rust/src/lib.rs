@@ -1493,7 +1493,7 @@ mod _1466_reorder_routes_to_make_all_paths_lead_to_the_city_zero;
 // mod _1490_clone_n_ary_tree;
 // mod _1491_average_salary_excluding_the_minimum_and_maximum_salary;
 // mod _1492_the_kth_factor_of_n;
-// mod _1493_longest_subarray_of_1s_after_deleting_one_element;
+mod _1493_longest_subarray_of_1_s_after_deleting_one_element;
 // mod _1494_parallel_courses_ii;
 // mod _1495_friendly_movies_streamed_last_month;
 // mod _1496_path_crossing;
