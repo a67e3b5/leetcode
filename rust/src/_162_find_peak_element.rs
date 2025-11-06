@@ -22,6 +22,7 @@ impl Solution {
 struct Solution;
 
 mod tests {
+    #[allow(unused_imports)]
     use super::Solution;
 
     #[test]
