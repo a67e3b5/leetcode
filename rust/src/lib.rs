@@ -2352,7 +2352,7 @@ mod _2336_smallest_number_in_infinite_set;
 // mod _2349_design_a_number_container_system;
 // mod _2350_shortest_impossible_sequence_of_rolls;
 // mod _2351_first_letter_to_appear_twice;
-// mod _2352_equal_row_and_column_pairs;
+mod _2352_equal_row_and_column_pairs;
 // mod _2353_design_a_food_rating_system;
 // mod _2354_number_of_excellent_pairs;
 // mod _2355_maximum_number_of_books_you_can_take;
