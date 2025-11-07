@@ -394,7 +394,7 @@ mod _374_guess_number_higher_or_lower;
 // mod _391_perfect_rectangle;
 mod _392_is_subsequence;
 // mod _393_utf_8_validation;
-// mod _394_decode_string;
+mod _394_decode_string;
 // mod _395_longest_substring_with_at_least_k_repeating_characters;
 // mod _396_rotate_function;
 // mod _397_integer_replacement;
