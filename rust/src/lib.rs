@@ -649,7 +649,7 @@ mod _643_maximum_average_subarray_i;
 // mod _646_maximum_length_of_pair_chain;
 // mod _647_palindromic_substrings;
 // mod _648_replace_words;
-// mod _649_dota2_senate;
+mod _649_dota_2_senate;
 // mod _650_2_keys_keyboard;
 // mod _651_4_keys_keyboard;
 // mod _652_find_duplicate_subtrees;
