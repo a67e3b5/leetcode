@@ -11,13 +11,13 @@ class Solution:
         l = len(nums)
         if l < 2:
             return l
-        num = nums[0]
-        count = 1
-        read = 1
+        num = None
+        count = 0
+        read = 0
         write = 0
         while read < l:
             if nums[read] == num:
-                if count <= 2:
+                if count < 2:
                     nums[write] = num
                     write += 1
                 count += 1
