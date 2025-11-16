@@ -11,27 +11,18 @@ class Solution:
         l = len(nums)
         if l < 2:
             return l
-        num = None
-        count = 0
-        read = 0
-        write = 0
-        while read < l:
-            if nums[read] == num:
-                if count < 2:
-                    nums[write] = num
-                    write += 1
-                count += 1
-            else:
-                num = nums[read]
-                nums[write] = num
+        write = 2
+        for read in range(2, l):
+            if nums[read] != nums[write - 2]:
+                nums[write] = nums[read]
                 write += 1
-                count = 1
-            read += 1
         return write
 
 
 # @lc code=end
 
+# nums = [0]
+# nums = [0, 1]
 # nums = [1, 1, 1, 2, 2, 3]
 nums = [0, 0, 1, 1, 1, 1, 2, 3, 3]
 sol = Solution()
