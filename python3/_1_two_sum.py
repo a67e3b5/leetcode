@@ -8,17 +8,12 @@
 # @lc code=start
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
-        nums = sorted(enumerate(nums), key=lambda x: x[1])
-        i = 0
-        j = len(nums) - 1
-        while i < j:
-            s = nums[i][1] + nums[j][1]
-            if s < target:
-                i += 1
-            elif s > target:
-                j -= 1
-            else:
-                return [nums[i][0], nums[j][0]]
+        index = {}
+        for i, num in enumerate(nums):
+            t = target - num
+            if t in index:
+                return [i, index[t]]
+            index[num] = i
 
 
 # @lc code=end
