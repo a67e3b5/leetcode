@@ -8,23 +8,22 @@
 # @lc code=start
 class Solution:
     def minSubArrayLen(self, target: int, nums: list[int]) -> int:
-        ans = 0
+        ans = float("inf")
         l = 0
         r = 0
-        while r <= len(nums):
-            s = sum(nums[l:r])
+        s = nums[0]
+        while r < len(nums):
             if s < target:
                 r += 1
-            elif s > target:
-                l += 1
-            elif ans == 0:
-                ans = r - l
-                r += 1
+                try:
+                    s += nums[r]
+                except IndexError:
+                    break
             else:
-                ans = min(ans, r - l)
-                r += 1
-
-        return ans
+                ans = min(ans, r - l + 1)
+                s -= nums[l]
+                l += 1
+        return ans if ans != float("inf") else 0
 
 
 # @lc code=end
