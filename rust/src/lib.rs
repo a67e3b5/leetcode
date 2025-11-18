@@ -14,7 +14,7 @@ mod _11_container_with_most_water;
 // mod _12_integer_to_roman;
 // mod _13_roman_to_integer;
 // mod _14_longest_common_prefix;
-// mod _15_3_sum;
+mod _15_3_sum;
 // mod _16_3_sum_closest;
 mod _17_letter_combinations_of_a_phone_number;
 // mod _18_4_sum;
