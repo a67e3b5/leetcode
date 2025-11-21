@@ -10,38 +10,33 @@ use std::collections::HashSet;
 use std::i32;
 
 impl Solution {
-    /// Reuse #1 logic.
+    /// https://leetcode.com/problems/3sum/solutions/5055810/video-two-pointer-solution-by-niits-cl7y/
     pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
+        let mut res = vec![];
         nums.sort_unstable();
-        let mut nums_list: Vec<Vec<i32>> = Vec::new();
-        let mut last_num = i32::MIN;
-        for (i, &num) in nums.iter().enumerate().rev() {
-            if num == last_num {
+
+        for i in 0..nums.len() {
+            if i > 0 && nums[i] == nums[i - 1] {
                 continue;
             }
-            last_num = num;
-            for mut nums in Self::two_sum(&nums[..i], -num) {
-                nums.push(num);
-                nums_list.push(nums);
+            let mut j = i + 1;
+            let mut k = nums.len() - 1;
+            while j < k {
+                let total = nums[i] + nums[j] + nums[k];
+                if total > 0 {
+                    k -= 1;
+                } else if total < 0 {
+                    j += 1;
+                } else {
+                    res.push(vec![nums[i], nums[j], nums[k]]);
+                    j += 1;
+                    while nums[j] == nums[j - 1] && j < k {
+                        j += 1;
+                    }
+                }
             }
         }
-        nums_list.dedup();
-        nums_list
-    }
-
-    /// Same as #1, except...
-    fn two_sum(nums: &[i32], target: i32) -> Vec<Vec<i32>> {
-        let mut seen: HashSet<i32> = HashSet::new();
-        let mut nums_list = vec![];
-        for &num in nums.iter() {
-            let complement = target - num;
-            if seen.contains(&complement) {
-                nums_list.push([complement, num].into());
-            } else {
-                seen.insert(num);
-            }
-        }
-        nums_list
+        res
     }
 }
 // @lc code=end
@@ -78,18 +73,6 @@ mod tests {
         assert_eq!(
             super::Solution::three_sum(vec![0, 0, 0, 0]),
             vec![vec![0, 0, 0]]
-        );
-    }
-
-    #[test]
-    fn two() {
-        assert_eq!(
-            super::Solution::two_sum(&[-1, 0, 1, 2, -1, -4], 4),
-            Vec::<Vec<_>>::new()
-        );
-        assert_eq!(
-            super::Solution::two_sum(&[-1, 0, 1, 2, -1, -4], 1),
-            vec![vec![0, 1], vec![-1, 2]]
         );
     }
 }
