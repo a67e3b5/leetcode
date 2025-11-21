@@ -125,7 +125,7 @@ mod _104_maximum_depth_of_binary_tree;
 // mod _122_best_time_to_buy_and_sell_stock_ii;
 // mod _123_best_time_to_buy_and_sell_stock_iii;
 // mod _124_binary_tree_maximum_path_sum;
-// mod _125_valid_palindrome;
+mod _125_valid_palindrome;
 // mod _126_word_ladder_ii;
 // mod _127_word_ladder;
 // mod _128_longest_consecutive_sequence;
