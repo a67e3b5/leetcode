@@ -12,10 +12,10 @@ impl Solution {
     /// Reuse #1 logic.
     pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut nums_set: HashSet<Vec<i32>> = HashSet::new();
-        'a: for (i, &num) in nums.iter().enumerate().rev() {
+        for (i, &num) in nums.iter().enumerate().rev() {
             for mut indices in Self::two_sum(&nums, -num) {
                 if i <= *indices.last().unwrap() {
-                    break 'a;
+                    continue;
                 }
                 indices.push(i);
                 let mut nums: Vec<i32> = indices.into_iter().map(|i| nums[i]).collect();
@@ -57,6 +57,21 @@ mod tests {
                 .into_iter()
                 .collect::<HashSet<_>>(),
             HashSet::from([vec![-1, 0, 1], vec![-1, -1, 2]])
+        );
+        assert_eq!(
+            super::Solution::three_sum(vec![
+                2, -3, 0, -2, -5, -5, -4, 1, 2, -2, 2, 0, 2, -4, 5, 5, -10
+            ])
+            .into_iter()
+            .collect::<HashSet<_>>(),
+            HashSet::from([
+                vec![-10, 5, 5],
+                vec![-5, 0, 5],
+                vec![-4, 2, 2],
+                vec![-3, -2, 5],
+                vec![-3, 1, 2],
+                vec![-2, 0, 2]
+            ])
         );
     }
 
