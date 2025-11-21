@@ -7,19 +7,26 @@
 // @lc code=start
 use std::collections::HashMap;
 use std::collections::HashSet;
+use std::i32;
 
 impl Solution {
     /// Reuse #1 logic.
     pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
         nums.sort_unstable();
-        let mut nums_set: HashSet<Vec<i32>> = HashSet::new();
+        let mut nums_list: Vec<Vec<i32>> = Vec::new();
+        let mut last_num = i32::MIN;
         for (i, &num) in nums.iter().enumerate().rev() {
+            if num == last_num {
+                continue;
+            }
+            last_num = num;
             for mut nums in Self::two_sum(&nums[..i], -num) {
                 nums.push(num);
-                nums_set.insert(nums);
+                nums_list.push(nums);
             }
         }
-        nums_set.into_iter().collect()
+        nums_list.dedup();
+        nums_list
     }
 
     /// Same as #1, except...
@@ -67,6 +74,10 @@ mod tests {
                 vec![-3, 1, 2],
                 vec![-2, 0, 2]
             ])
+        );
+        assert_eq!(
+            super::Solution::three_sum(vec![0, 0, 0, 0]),
+            vec![vec![0, 0, 0]]
         );
     }
 
