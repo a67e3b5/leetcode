@@ -5,21 +5,28 @@
  */
 
 // @lc code=start
+use std::cmp::max;
+use std::cmp::min;
+
 impl Solution {
     pub fn max_area(height: Vec<i32>) -> i32 {
-        let mut result = 0;
-        let mut iter = height.iter().enumerate();
-        let mut p1 = iter.next();
-        let mut p2 = iter.next_back();
-        while let (Some((i, h1)), Some((j, h2))) = (p1, p2) {
-            result = result.max(h1.min(h2) * (j - i) as i32);
-            if h1 < h2 {
-                p1 = iter.next();
-            } else {
-                p2 = iter.next_back();
+        let mut l = 0;
+        let mut r = height.len() - 1;
+        let mut h = min(height[l], height[r]);
+        let mut area = h * (r - l) as i32;
+        while l < r {
+            if height[l] <= h {
+                l += 1;
+                continue;
             }
+            if height[r] <= h {
+                r -= 1;
+                continue;
+            }
+            h = min(height[l], height[r]);
+            area = max(area, h * (r - l) as i32);
         }
-        result
+        area
     }
 }
 // @lc code=end
