@@ -10,36 +10,31 @@ use std::collections::HashSet;
 
 impl Solution {
     /// Reuse #1 logic.
-    pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
+    pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
+        nums.sort_unstable();
         let mut nums_set: HashSet<Vec<i32>> = HashSet::new();
         for (i, &num) in nums.iter().enumerate().rev() {
-            for mut indices in Self::two_sum(&nums, -num) {
-                if i <= *indices.last().unwrap() {
-                    continue;
-                }
-                indices.push(i);
-                let mut nums: Vec<i32> = indices.into_iter().map(|i| nums[i]).collect();
-                nums.sort_unstable();
+            for mut nums in Self::two_sum(&nums[..i], -num) {
+                nums.push(num);
                 nums_set.insert(nums);
             }
         }
-        dbg!(&nums_set);
         nums_set.into_iter().collect()
     }
 
     /// Same as #1, except...
-    fn two_sum(nums: &[i32], target: i32) -> Vec<Vec<usize>> {
-        let mut seen: HashMap<i32, usize> = HashMap::new();
-        let mut indices_list = vec![];
-        for (i, &num) in nums.iter().enumerate() {
+    fn two_sum(nums: &[i32], target: i32) -> Vec<Vec<i32>> {
+        let mut seen: HashSet<i32> = HashSet::new();
+        let mut nums_list = vec![];
+        for &num in nums.iter() {
             let complement = target - num;
-            if let Some(&j) = seen.get(&complement) {
-                indices_list.push([j, i].into());
+            if seen.contains(&complement) {
+                nums_list.push([complement, num].into());
             } else {
-                seen.insert(num, i);
+                seen.insert(num);
             }
         }
-        indices_list
+        nums_list
     }
 }
 // @lc code=end
@@ -83,7 +78,7 @@ mod tests {
         );
         assert_eq!(
             super::Solution::two_sum(&[-1, 0, 1, 2, -1, -4], 1),
-            vec![vec![1, 2], vec![0, 3]]
+            vec![vec![0, 1], vec![-1, 2]]
         );
     }
 }
