@@ -347,7 +347,7 @@ mod _338_counting_bits;
 // mod _344_reverse_string;
 mod _345_reverse_vowels_of_a_string;
 // mod _346_moving_average_from_data_stream;
-// mod _347_top_k_frequent_elements;
+mod _347_top_k_frequent_elements;
 // mod _348_design_tic_tac_toe;
 // mod _349_intersection_of_two_arrays;
 // mod _350_intersection_of_two_arrays_ii;
