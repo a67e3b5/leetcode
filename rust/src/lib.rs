@@ -567,7 +567,7 @@ mod _547_number_of_provinces;
 // mod _564_find_the_closest_palindrome;
 // mod _565_array_nesting;
 // mod _566_reshape_the_matrix;
-// mod _567_permutation_in_string;
+mod _567_permutation_in_string;
 // mod _568_maximum_vacation_days;
 // mod _569_median_employee_salary;
 // mod _570_managers_with_at_least_5_direct_reports;
