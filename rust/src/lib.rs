@@ -242,7 +242,7 @@ mod _238_product_of_array_except_self;
 // mod _239_sliding_window_maximum;
 // mod _240_search_a_2_d_matrix_ii;
 // mod _241_different_ways_to_add_parentheses;
-// mod _242_valid_anagram;
+mod _242_valid_anagram;
 // mod _243_shortest_word_distance;
 // mod _244_shortest_word_distance_ii;
 // mod _245_shortest_word_distance_iii;
