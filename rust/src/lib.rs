@@ -49,7 +49,7 @@ mod _17_letter_combinations_of_a_phone_number;
 // mod _47_permutations_ii;
 // mod _48_rotate_image;
 // mod _48_rotate_image;
-// mod _49_group_anagrams;
+mod _49_group_anagrams;
 // mod _50_pow_x_n;
 // mod _51_n_queens;
 // mod _52_n_queens_ii;
