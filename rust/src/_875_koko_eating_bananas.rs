@@ -7,23 +7,18 @@
 // @lc code=start
 impl Solution {
     pub fn min_eating_speed(piles: Vec<i32>, h: i32) -> i32 {
-        if h == 1 {
-            return piles[0];
-        }
-        let mut v_sup = (piles.iter().max().unwrap() * piles.len() as i32 - 1) / (h - 1);
-        let mut v_inf = (piles.iter().sum::<i32>() - 1) / (h - 1);
-        while v_inf <= v_sup {
+        let is_feasible = |v: i32| h >= piles.iter().map(|p| (p - 1) / v + 1).sum::<i32>();
+        let mut v_inf = 1;
+        let mut v_sup = *piles.iter().max().unwrap();
+        while v_inf < v_sup {
             let v_mid = (v_inf + v_sup) / 2;
-            let h_mid = piles.iter().map(|p| (p - 1) / v_mid + 1).sum::<i32>();
-            if h_mid == h {
-                return v_mid;
-            } else if h_mid < h {
-                v_sup -= 1;
+            if is_feasible(v_mid) {
+                v_sup = v_mid;
             } else {
-                v_inf += 1;
+                v_inf = v_mid + 1;
             }
         }
-        unreachable!("case: {piles:?}, {h}")
+        v_inf
     }
 }
 // @lc code=end
