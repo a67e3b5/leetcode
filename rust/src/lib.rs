@@ -875,7 +875,7 @@ mod _841_keys_and_rooms;
 mod _872_leaf_similar_trees;
 // mod _873_length_of_longest_fibonacci_subsequence;
 // mod _874_walking_robot_simulation;
-// mod _875_koko_eating_bananas;
+mod _875_koko_eating_bananas;
 // mod _876_middle_of_the_linked_list;
 // mod _877_stone_game;
 // mod _878_nth_magical_number;
