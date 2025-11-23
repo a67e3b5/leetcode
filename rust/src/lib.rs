@@ -704,7 +704,7 @@ mod _700_search_in_a_binary_search_tree;
 // mod _701_insert_into_a_binary_search_tree;
 // mod _702_search_in_a_sorted_array_of_unknown_size;
 // mod _703_kth_largest_element_in_a_stream;
-// mod _704_binary_search;
+mod _704_binary_search;
 // mod _705_design_hash_set;
 // mod _706_design_hash_map;
 // mod _707_design_linked_list;
