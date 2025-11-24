@@ -4,37 +4,41 @@
  * [207] Course Schedule
  */
 
-use std::{cmp::max, collections::{HashMap, HashSet}, mem::take, vec};
-
 // @lc code=start
+
+use std::collections::{HashMap, HashSet, VecDeque};
+
 impl Solution {
-    /// Check if asny course has a loop in the dependency graph.
+    /// Topological sort by Kahn algorithm.
     pub fn can_finish(num_courses: i32, prerequisites: Vec<Vec<i32>>) -> bool {
-        let mut graph: HashMap<i32, HashSet<i32>> = HashMap::new();
-        prerequisites.into_iter()
-            .for_each(|p| {
-                graph.entry(p[0]).or_default().insert(p[1]);
-            });
-        // universal over courses?
-        let mut taken = HashSet::new();
-        let mut dfs = |course: i32| -> bool {
-            let mut stack = vec![course];
-            taken.insert(course);
-            while let Some(c) = stack.pop() {
-                let Some(ps) = graph.remove(&c) else {
-                    continue;
-                };
-                for p in ps {
-                    if taken.contains(&p) {
-                        return false;
+        let mut graph: HashMap<usize, HashSet<usize>> = HashMap::new();
+        let mut indegree = vec![0; num_courses as usize];
+        prerequisites.into_iter().for_each(|p| {
+            graph
+                .entry(p[1] as usize)
+                .or_default()
+                .insert(p[0] as usize);
+            indegree[p[0] as usize] += 1;
+        });
+        let mut queue = VecDeque::new();
+        indegree
+            .iter()
+            .enumerate()
+            .filter(|(_c, ind)| **ind == 0)
+            .for_each(|(c, _ind)| queue.push_back(c));
+        let mut sorted = vec![];
+        while let Some(p) = queue.pop_front() {
+            sorted.push(p);
+            if let Some(cs) = graph.get(&p) {
+                for c in cs {
+                    indegree[*c] -= 1;
+                    if indegree[*c] == 0 {
+                        queue.push_back(*c);
                     }
-                    stack.push(p);
-                    taken.insert(p);
                 }
             }
-            true
-        };
-        (0..num_courses).all(|c| dfs(c))
+        }
+        sorted.len() as i32 == num_courses
     }
 }
 // @lc code=end
