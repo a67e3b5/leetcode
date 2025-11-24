@@ -322,7 +322,7 @@ mod _283_move_zeroes;
 // mod _319_bulb_switcher;
 // mod _320_generalized_abbreviation;
 // mod _321_create_maximum_number;
-// mod _322_coin_change;
+mod _322_coin_change;
 // mod _323_number_of_connected_components_in_an_undirected_graph;
 // mod _324_wiggle_sort_ii;
 // mod _325_maximum_size_subarray_sum_equals_k;
