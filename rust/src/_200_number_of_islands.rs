@@ -5,29 +5,54 @@
  */
 
 // @lc code=start
-use std::collections::VecDeque;
+use std::collections::HashSet;
 
 impl Solution {
     pub fn num_islands(grid: Vec<Vec<char>>) -> i32 {
         let m = grid.len();
         let n = grid[0].len();
+        let on_land = |&(i, j): &(usize, usize)| grid[i][j] == '1';
+        let neighbors = |(i, j): (usize, usize)| {
+            let mut res = vec![];
+            if i > 0 {
+                res.push((i - 1, j));
+            }
+            if j > 0 {
+                res.push((i, j - 1));
+            }
+            if i < m - 1 {
+                res.push((i + 1, j));
+            }
+            if j < n - 1 {
+                res.push((i, j + 1));
+            }
+            res
+        };
         let mut ans = 0;
-        for (i, row) in grid.iter().enumerate() {
-            for (j, &c) in row.iter().enumerate() {
-                if c != '1' {
-                    continue;
-                }
-                if i > 0 && grid[i - 1][j] == '1'
-                    || j > 0 && grid[i][j - 1] == '1'
-                    || i < m && grid[i + 1][j] == '1'
-                    || j < n && grid[i][j + 1] == '1'
-                {
-                    continue;
-                }
-                ans += 1;
+        let mut seen: HashSet<(usize, usize)> = HashSet::new();
+        let Some(k) = grid.iter().flatten().position(|&c| c == '1') else {
+            return ans;
+        };
+        let mut last_landing_index = k;
+        let mut last_landing_point = (last_landing_index / n, last_landing_index % n);
+        loop {
+            ans += 1;
+            let mut stack = vec![last_landing_point];
+            while let Some((i, j)) = stack.pop() {
+                seen.insert((i, j));
+                let mut neighbors = neighbors((i, j));
+                neighbors.retain(|p| on_land(p) && !seen.contains(p));
+                neighbors.into_iter().for_each(|p| stack.push(p));
+            }
+            while seen.contains(&last_landing_point) {
+                let offset = last_landing_index + 1;
+                let Some(k) = grid.iter().flatten().skip(offset).position(|&c| c == '1') else {
+                    return ans;
+                };
+                last_landing_index = offset + k;
+                last_landing_point = (last_landing_index / n, last_landing_index % n);
             }
         }
-        ans
     }
 }
 // @lc code=end
