@@ -12,47 +12,40 @@ impl Solution {
         let m = grid.len();
         let n = grid[0].len();
         let on_land = |&(i, j): &(usize, usize)| grid[i][j] == '1';
-        let neighbors = |(i, j): (usize, usize)| {
-            let mut res = vec![];
-            if i > 0 {
-                res.push((i - 1, j));
+        let dfs = |(i, j): (usize, usize), seen: &mut HashSet<(usize, usize)>| {
+            let mut stack = vec![(i, j)];
+            seen.insert((i, j));
+
+            while let Some((i, j)) = stack.pop() {
+                if i > 0 && on_land(&(i - 1, j)) && !seen.contains(&(i - 1, j)) {
+                    stack.push((i - 1, j));
+                    seen.insert((i - 1, j));
+                }
+                if j > 0 && on_land(&(i, j - 1)) && !seen.contains(&(i, j - 1)) {
+                    stack.push((i, j - 1));
+                    seen.insert((i, j - 1));
+                }
+                if i < m - 1 && on_land(&(i + 1, j)) && !seen.contains(&(i + 1, j)) {
+                    stack.push((i + 1, j));
+                    seen.insert((i + 1, j));
+                }
+                if j < n - 1 && on_land(&(i, j + 1)) && !seen.contains(&(i, j + 1)) {
+                    stack.push((i, j + 1));
+                    seen.insert((i, j + 1));
+                }
             }
-            if j > 0 {
-                res.push((i, j - 1));
-            }
-            if i < m - 1 {
-                res.push((i + 1, j));
-            }
-            if j < n - 1 {
-                res.push((i, j + 1));
-            }
-            res
         };
         let mut ans = 0;
         let mut seen: HashSet<(usize, usize)> = HashSet::new();
-        let Some(k) = grid.iter().flatten().position(|&c| c == '1') else {
-            return ans;
-        };
-        let mut last_landing_index = k;
-        let mut last_landing_point = (last_landing_index / n, last_landing_index % n);
-        loop {
-            ans += 1;
-            let mut stack = vec![last_landing_point];
-            while let Some((i, j)) = stack.pop() {
-                seen.insert((i, j));
-                let mut neighbors = neighbors((i, j));
-                neighbors.retain(|p| on_land(p) && !seen.contains(p));
-                neighbors.into_iter().for_each(|p| stack.push(p));
-            }
-            while seen.contains(&last_landing_point) {
-                let offset = last_landing_index + 1;
-                let Some(k) = grid.iter().flatten().skip(offset).position(|&c| c == '1') else {
-                    return ans;
-                };
-                last_landing_index = offset + k;
-                last_landing_point = (last_landing_index / n, last_landing_index % n);
+        for i in 0..m {
+            for j in 0..n {
+                if on_land(&(i, j)) && !seen.contains(&(i, j)) {
+                    ans += 1;
+                    dfs((i, j), &mut seen);
+                }
             }
         }
+        ans
     }
 }
 // @lc code=end
