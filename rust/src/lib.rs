@@ -994,7 +994,7 @@ mod _933_number_of_recent_calls;
 // mod _991_broken_calculator;
 // mod _992_subarrays_with_k_different_integers;
 // mod _993_cousins_in_binary_tree;
-// mod _994_rotting_oranges;
+mod _994_rotting_oranges;
 // mod _995_minimum_number_of_k_consecutive_bit_flips;
 // mod _996_number_of_squareful_arrays;
 // mod _997_find_the_town_judge;
