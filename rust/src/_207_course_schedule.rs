@@ -4,57 +4,37 @@
  * [207] Course Schedule
  */
 
-use std::{cmp::max, collections::HashSet, vec};
+use std::{cmp::max, collections::{HashMap, HashSet}, mem::take, vec};
 
 // @lc code=start
 impl Solution {
-    pub fn can_finish(num_courses: i32, mut prerequisites: Vec<Vec<i32>>) -> bool {
-        let mut visited = HashSet::new();
-        // search upward
-        let mut upper_depth = 0;
-        prerequisites.sort_unstable_by_key(|p| p[1]);
-        let mut stack = vec![(prerequisites[0][0], 0)];
-        visited.insert(prerequisites[0][0]);
-        while let Some((c, depth)) = stack.pop() {
-            upper_depth = max(upper_depth, depth);
-            let Ok(offset) = prerequisites.binary_search_by_key(&c, |p| p[1]) else {
-                continue;
-            };
-            let next = prerequisites
-                .iter()
-                .skip(offset)
-                .take_while(|p| p[1] == c)
-                .filter(|p| !visited.contains(&p[0]))
-                .map(|p| (p[0], depth + 1))
-                .collect::<Vec<_>>();
-            next.iter().for_each(|(c, _depth)| {
-                visited.insert(*c);
+    /// Check if asny course has a loop in the dependency graph.
+    pub fn can_finish(num_courses: i32, prerequisites: Vec<Vec<i32>>) -> bool {
+        let mut graph: HashMap<i32, HashSet<i32>> = HashMap::new();
+        prerequisites.into_iter()
+            .for_each(|p| {
+                graph.entry(p[0]).or_default().insert(p[1]);
             });
-            stack.extend(next);
-        }
-        // search downward
-        let mut downer_depth = 0;
-        prerequisites.sort_unstable_by_key(|p| p[0]);
-        let mut stack = vec![(prerequisites[0][1], 0)];
-        visited.insert(prerequisites[0][1]);
-        while let Some((c, depth)) = stack.pop() {
-            downer_depth = max(downer_depth, depth);
-            let Ok(offset) = prerequisites.binary_search_by_key(&c, |p| p[0]) else {
-                continue;
-            };
-            let next = prerequisites
-                .iter()
-                .skip(offset)
-                .take_while(|p| p[0] == c)
-                .filter(|p| !visited.contains(&p[1]))
-                .map(|p| (p[1], depth + 1))
-                .collect::<Vec<_>>();
-            next.iter().for_each(|(c, _depth)| {
-                visited.insert(*c);
-            });
-            stack.extend(next);
-        }
-        upper_depth + downer_depth >= num_courses
+        // universal over courses?
+        let mut taken = HashSet::new();
+        let mut dfs = |course: i32| -> bool {
+            let mut stack = vec![course];
+            taken.insert(course);
+            while let Some(c) = stack.pop() {
+                let Some(ps) = graph.remove(&c) else {
+                    continue;
+                };
+                for p in ps {
+                    if taken.contains(&p) {
+                        return false;
+                    }
+                    stack.push(p);
+                    taken.insert(p);
+                }
+            }
+            true
+        };
+        (0..num_courses).all(|c| dfs(c))
     }
 }
 // @lc code=end
