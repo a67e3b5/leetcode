@@ -5,11 +5,18 @@
  */
 
 // @lc code=start
+use std::cmp::max;
+
 impl Solution {
     pub fn rob(nums: Vec<i32>) -> i32 {
-        nums.into_iter()
-            .fold((0, 0), |(sum2, sum1), num0| (sum1, sum1.max(sum2 + num0)))
-            .1
+        let mut no = 0;
+        let mut yes = nums[0];
+        for i in 1..nums.len() {
+            let tmp = no;
+            no = max(no, yes);
+            yes = max(yes, tmp + nums[i]);
+        }
+        max(no, yes)
     }
 }
 // @lc code=end
