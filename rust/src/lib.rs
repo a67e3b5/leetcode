@@ -200,7 +200,7 @@ mod _162_find_peak_element;
 // mod _197_rising_temperature;
 mod _198_house_robber;
 mod _199_binary_tree_right_side_view;
-// mod _200_number_of_islands;
+mod _200_number_of_islands;
 // mod _201_bitwise_and_of_numbers_range;
 // mod _202_happy_number;
 // mod _203_remove_linked_list_elements;
