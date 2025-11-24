@@ -207,7 +207,7 @@ mod _200_number_of_islands;
 // mod _204_count_primes;
 // mod _205_isomorphic_strings;
 mod _206_reverse_linked_list;
-// mod _207_course_schedule;
+mod _207_course_schedule;
 mod _208_implement_trie_prefix_tree;
 mod _209_minimum_size_subarray_sum;
 // mod _210_course_schedule_ii;
