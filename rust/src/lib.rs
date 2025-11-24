@@ -70,7 +70,7 @@ mod _62_unique_paths;
 // mod _67_add_binary;
 // mod _68_text_justification;
 // mod _69_sqrt_x;
-// mod _70_climbing_stairs;
+mod _70_climbing_stairs;
 // mod _71_simplify_path;
 // mod _72_edit_distance;
 // mod _73_set_matrix_zeroes;
