@@ -9,13 +9,19 @@ use std::collections::VecDeque;
 
 impl Solution {
     pub fn num_islands(grid: Vec<Vec<char>>) -> i32 {
+        let m = grid.len();
+        let n = grid[0].len();
         let mut ans = 0;
         for (i, row) in grid.iter().enumerate() {
             for (j, &c) in row.iter().enumerate() {
                 if c != '1' {
                     continue;
                 }
-                if i > 0 && grid[i - 1][j] == '1' || j > 0 && grid[i][j - 1] == '1' {
+                if i > 0 && grid[i - 1][j] == '1'
+                    || j > 0 && grid[i][j - 1] == '1'
+                    || i < m && grid[i + 1][j] == '1'
+                    || j < n && grid[i][j + 1] == '1'
+                {
                     continue;
                 }
                 ans += 1;
