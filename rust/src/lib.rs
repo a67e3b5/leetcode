@@ -300,7 +300,7 @@ mod _283_move_zeroes;
 // mod _297_serialize_and_deserialize_binary_tree;
 // mod _298_binary_tree_longest_consecutive_sequence;
 // mod _299_bulls_and_cows;
-// mod _300_longest_increasing_subsequence;
+mod _300_longest_increasing_subsequence;
 // mod _301_remove_invalid_parentheses;
 // mod _302_smallest_rectangle_enclosing_black_pixels;
 // mod _303_range_sum_query_immutable;
