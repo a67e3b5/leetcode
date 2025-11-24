@@ -7,23 +7,14 @@
 // @lc code=start
 impl Solution {
     pub fn climb_stairs(n: i32) -> i32 {
-        Self::one(n) + Self::two(n)
-    }
-
-    fn one(top: i32) -> i32 {
-        match top {
-            1 => 1,
-            2 => 1,
-            _ => Self::one(top - 1) + Self::two(top - 1),
+        let mut last = 0;
+        let mut curr = 1;
+        for _ in 0..n {
+            let tmp = curr;
+            curr = last + curr;
+            last = tmp;
         }
-    }
-
-    fn two(top: i32) -> i32 {
-        match top {
-            1 => 0,
-            2 => 1,
-            _ => Self::one(top - 2) + Self::two(top - 2),
-        }
+        curr
     }
 }
 // @lc code=end
