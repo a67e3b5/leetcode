@@ -190,7 +190,7 @@ mod _162_find_peak_element;
 // mod _187_repeated_dna_sequences;
 // mod _188_best_time_to_buy_and_sell_stock_iv;
 // mod _189_rotate_array;
-// mod _190_reverse_bits;
+mod _190_reverse_bits;
 // mod _191_number_of_1_bits;
 // mod _192_word_frequency;
 // mod _193_valid_phone_numbers;
