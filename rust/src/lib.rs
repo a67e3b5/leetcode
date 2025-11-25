@@ -111,7 +111,7 @@ mod _104_maximum_depth_of_binary_tree;
 // mod _108_convert_sorted_array_to_binary_search_tree;
 // mod _109_convert_sorted_list_to_binary_search_tree;
 // mod _110_balanced_binary_tree;
-// mod _111_minimum_depth_of_binary_tree;
+mod _111_minimum_depth_of_binary_tree;
 // mod _112_path_sum;
 // mod _113_path_sum_ii;
 // mod _114_flatten_binary_tree_to_linked_list;
