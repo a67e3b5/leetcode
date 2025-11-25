@@ -6,19 +6,20 @@
 
 // @lc code=start
 use std::cell::RefCell;
+use std::cmp::max;
 use std::rc::Rc;
 impl Solution {
     pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        Self::_max_depth(&root)
-    }
-    fn _max_depth(root: &Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        if let Some(node) = root {
-            return 1 + std::cmp::max(
-                Self::_max_depth(&node.borrow().left),
-                Self::_max_depth(&node.borrow().right),
-            );
+        let mut stack = vec![(root, 1)];
+        let mut max_depth = 0;
+        while let Some((node, depth)) = stack.pop() {
+            if let Some(node) = node {
+                max_depth = max(max_depth, depth);
+                stack.push((node.borrow().left.clone(), depth + 1));
+                stack.push((node.borrow().right.clone(), depth + 1));
+            }
         }
-        0
+        max_depth
     }
 }
 // @lc code=end
