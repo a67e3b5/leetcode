@@ -26,7 +26,7 @@ mod _20_valid_parentheses;
 // mod _24_swap_nodes_in_pairs;
 // mod _25_reverse_nodes_in_k_group;
 // mod _26_remove_duplicates_from_sorted_array;
-// mod _27_remove_element;
+mod _27_remove_element;
 // mod _28_find_the_index_of_the_first_occurrence_in_a_string;
 // mod _29_divide_two_integers;
 // mod _30_substring_with_concatenation_of_all_words;
