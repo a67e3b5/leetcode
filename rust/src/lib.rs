@@ -55,7 +55,7 @@ mod _49_group_anagrams;
 // mod _52_n_queens_ii;
 // mod _53_maximum_subarray;
 // mod _54_spiral_matrix;
-// mod _55_jump_game;
+mod _55_jump_game;
 // mod _56_merge_intervals;
 // mod _57_insert_interval;
 // mod _58_length_of_last_word;
