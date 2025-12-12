@@ -77,7 +77,7 @@ mod _70_climbing_stairs;
 // mod _74_search_a_2_d_matrix;
 // mod _75_sort_colors;
 // mod _76_minimum_window_substring;
-// mod _77_combinations;
+mod _77_combinations;
 // mod _78_subsets;
 // mod _79_word_search;
 // mod _80_remove_duplicates_from_sorted_array_ii;
