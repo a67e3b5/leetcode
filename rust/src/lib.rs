@@ -108,7 +108,7 @@ mod _104_maximum_depth_of_binary_tree;
 // mod _105_construct_binary_tree_from_preorder_and_inorder_traversal;
 // mod _106_construct_binary_tree_from_inorder_and_postorder_traversal;
 // mod _107_binary_tree_level_order_traversal_ii;
-// mod _108_convert_sorted_array_to_binary_search_tree;
+mod _108_convert_sorted_array_to_binary_search_tree;
 // mod _109_convert_sorted_list_to_binary_search_tree;
 // mod _110_balanced_binary_tree;
 mod _111_minimum_depth_of_binary_tree;
