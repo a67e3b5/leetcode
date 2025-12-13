@@ -7,15 +7,15 @@
 // @lc code=start
 impl Solution {
     pub fn max_sub_array(nums: Vec<i32>) -> i32 {
-        let mut cur = nums[0];
-        let mut best = nums[0];
-
-        for &x in &nums[1..] {
-            cur = (cur + x).max(x);
-            best = best.max(cur);
-        }
-
-        best
+        let init = nums[0];
+        nums.into_iter()
+            .skip(1)
+            .fold((init, init), |(cur, best), x| {
+                let cur = (cur + x).max(x);
+                let best = best.max(cur);
+                (cur, best)
+            })
+            .1
     }
 }
 // @lc code=end
