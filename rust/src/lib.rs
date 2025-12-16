@@ -11,7 +11,7 @@ mod _3_longest_substring_without_repeating_characters;
 mod _9_palindrome_number;
 // mod _10_regular_expression_matching;
 mod _11_container_with_most_water;
-// mod _12_integer_to_roman;
+mod _12_integer_to_roman;
 // mod _13_roman_to_integer;
 // mod _14_longest_common_prefix;
 mod _15_3_sum;
