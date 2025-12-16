@@ -230,7 +230,7 @@ mod _215_kth_largest_element_in_an_array;
 // mod _227_basic_calculator_ii;
 // mod _228_summary_ranges;
 // mod _229_majority_element_ii;
-// mod _230_kth_smallest_element_in_a_bst;
+mod _230_kth_smallest_element_in_a_bst;
 // mod _231_power_of_two;
 // mod _232_implement_queue_using_stacks;
 // mod _233_number_of_digit_one;
