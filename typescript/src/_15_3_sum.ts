@@ -6,7 +6,7 @@
 
 // @lc code=start
 function threeSum(nums: number[]): number[][] {
-    let res: number[][] = [];
+    const res: number[][] = [];
     nums.sort((a, b) => a - b);
 
     for (const i of new Array(nums.length).keys()) {
@@ -16,7 +16,7 @@ function threeSum(nums: number[]): number[][] {
         let j = i + 1;
         let k = nums.length - 1;
         while (j < k) {
-            let total = nums[i]! + nums[j]! + nums[k]!;
+            const total = nums[i]! + nums[j]! + nums[k]!;
             if (total > 0) {
                 k -= 1;
             } else if (total < 0) {

@@ -6,25 +6,21 @@
 
 // @lc code=start
 function topKFrequent(nums: number[], k: number): number[] {
-    let num_to_freq: Record<number, number> = {};
+    const numToFreq = new Map<number, number>();
     for (const n of nums) {
-        if (!num_to_freq[n]) {
-            num_to_freq[n] = 0;
-        }
-        num_to_freq[n] += 1;
+        numToFreq.set(n, (numToFreq.get(n) ?? 0) + 1);
     }
-    let freq_to_num: Record<number, number> = {};
-    for (const [n, f] of Object.entries(num_to_freq)) {
-        freq_to_num[f] = n as unknown as number;
+    const freqToNum = new Map<number, number>();
+    for (const [n, f] of numToFreq.entries()) {
+        freqToNum.set(f, n);
     }
-    return Object
-        .entries(freq_to_num)
-        .map((v, i, a) => ([v[0] as unknown as number, v[1]]))
-        .sort((a, b) => (b[0]! - a[0]!))
+    return [...freqToNum]
+        .sort()
+        .reverse()
         .slice(0, k)
-        .map((v, i, a) => v[1]!)
+        .map((v, _i, _a) => v[1])
 };
 // @lc code=end
 
 console.log(topKFrequent([1, 1, 1, 2, 2, 3], 2));
-// ['1', '2']: string[]
+// [1, 2]: number[]

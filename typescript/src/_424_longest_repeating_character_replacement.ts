@@ -7,17 +7,15 @@
 // @lc code=start
 function characterReplacement(s: string, k: number): number {
     const arr = s.split('');
-    let freq: Record<string, number> = {};
+    const freq: Record<string, number> = {};
     let res = 0;
     let i = 0;
     for (const [j, c] of arr.entries()) {
-        if (!freq[c]) {
-            freq[c] = 0;
-        }
+        freq[c] ??= 0;
         freq[c] += 1;
-        const max_freq = Math.max(...Object.values(freq));
-        const cur_len = j - i + 1;
-        if (cur_len - max_freq > k) {
+        const maxFreq = Math.max(...Object.values(freq));
+        const curLen = j - i + 1;
+        if (curLen - maxFreq > k) {
             freq[arr[i]!]! -= 1;
             i += 1;
         }
