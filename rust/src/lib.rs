@@ -217,7 +217,7 @@ mod _209_minimum_size_subarray_sum;
 // mod _214_shortest_palindrome;
 mod _215_kth_largest_element_in_an_array;
 // mod _216_combination_sum_iii;
-// mod _217_contains_duplicate;
+mod _217_contains_duplicate;
 // mod _218_the_skyline_problem;
 // mod _219_contains_duplicate_ii;
 // mod _220_contains_duplicate_iii;
