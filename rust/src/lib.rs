@@ -20,7 +20,7 @@ mod _17_letter_combinations_of_a_phone_number;
 // mod _18_4_sum;
 // mod _19_remove_nth_node_from_end_of_list;
 mod _20_valid_parentheses;
-// mod _21_merge_two_sorted_lists;
+mod _21_merge_two_sorted_lists;
 // mod _22_generate_parentheses;
 // mod _23_merge_k_sorted_lists;
 // mod _24_swap_nodes_in_pairs;
