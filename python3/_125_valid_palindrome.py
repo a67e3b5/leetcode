@@ -7,7 +7,8 @@
 # @lc code=start
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        
-# @lc code=end
+        filtered = [c.lower() for c in s if c.isalnum()]
+        return filtered == filtered[::-1]
 
-l
+
+# @lc code=end

@@ -15,15 +15,13 @@ class ListNode:
 # @lc code=start
 class Solution:
     def deleteDuplicates(self, head: ListNode | None) -> ListNode | None:
-        dummy = ListNode()
-        cur = dummy
-        while head:
-            while head.next and head.val == head.next.val:
-                head = head.next
-            cur.next = head
-            cur = cur.next
-            head = head.next
-        return dummy.next
+        cur = head
+        while cur and cur.next:
+            if cur.val == cur.next.val:
+                cur.next = cur.next.next
+            else:
+                cur = cur.next
+        return head
 
 
 # @lc code=end
